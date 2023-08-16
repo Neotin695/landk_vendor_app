@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "760162953245",
+    "project_id": "landk-83dd6",
+    "storage_bucket": "landk-83dd6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:760162953245:android:8bd1b05f30c3f0c8c87ef4",
+        "android_client_info": {
+          "package_name": "mehani.sim.delivery_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "760162953245-s8i0rhf81kmke80s75efovoaj60bmm7u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLxF-LNAhhF7ERr8JShX4rg3dRggvbLdQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "760162953245-s8i0rhf81kmke80s75efovoaj60bmm7u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:760162953245:android:51eb50e0cc31a5c0c87ef4",
+        "android_client_info": {
+          "package_name": "mehani.sim.vendor_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "760162953245-s8i0rhf81kmke80s75efovoaj60bmm7u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLxF-LNAhhF7ERr8JShX4rg3dRggvbLdQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "760162953245-s8i0rhf81kmke80s75efovoaj60bmm7u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
