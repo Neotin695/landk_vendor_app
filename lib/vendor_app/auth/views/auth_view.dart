@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:formz/formz.dart';
 import 'package:sizer/sizer.dart';
 import 'package:vendor_app/core/constances/media_const.dart';
+import 'package:vendor_app/core/shared/offline_widget.dart';
 import '../../../core/theme/colors/landk_colors.dart';
 import '../../../core/language/lang.dart';
 import '../../../core/theme/fonts/landk_fonts.dart';
@@ -44,38 +45,40 @@ class _AuthViewState extends State<AuthView> {
             );
         }
       },
-      child: SingleChildScrollView(
-        child: SafeArea(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                vSpace(5),
-                SvgPicture.asset(iLogoOrange),
-                vSpace(5),
-                Text(
-                  AppLocalizations.of(context)!.welcome,
-                  style: h3,
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 3.w),
-                  child: Text(
-                    AppLocalizations.of(context)!.welcomeMessage,
-                    textAlign: TextAlign.center,
-                    style: h6,
+      child: OfflineWidget(
+        child: SingleChildScrollView(
+          child: SafeArea(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  vSpace(5),
+                  SvgPicture.asset(iLogoOrange),
+                  vSpace(5),
+                  Text(
+                    AppLocalizations.of(context)!.welcome,
+                    style: h3,
                   ),
-                ),
-                vSpace(5),
-                const _Email(),
-                vSpace(2),
-                const _Password(),
-                vSpace(2),
-                const _ForgotPassword(),
-                vSpace(2),
-                const _SignInBtn(),
-                vSpace(1),
-                const _CreateAccount(),
-              ],
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 3.w),
+                    child: Text(
+                      AppLocalizations.of(context)!.welcomeMessage,
+                      textAlign: TextAlign.center,
+                      style: h6,
+                    ),
+                  ),
+                  vSpace(5),
+                  const _Email(),
+                  vSpace(2),
+                  const _Password(),
+                  vSpace(2),
+                  const _ForgotPassword(),
+                  vSpace(2),
+                  const _SignInBtn(),
+                  vSpace(1),
+                  const _CreateAccount(),
+                ],
+              ),
             ),
           ),
         ),
@@ -190,6 +193,7 @@ class _Email extends StatelessWidget {
         return Container(
           margin: EdgeInsets.symmetric(horizontal: 5.w),
           child: TextField(
+            textDirection: directionField(context),
             key: const Key('email-input'),
             onChanged: (email) => context.read<AuthCubit>().emailChanged(email),
             decoration: InputDecoration(
@@ -203,6 +207,8 @@ class _Email extends StatelessWidget {
       },
     );
   }
+
+  TextDirection directionField(BuildContext context) => locale(context)? TextDirection.rtl: TextDirection.ltr;
 }
 
 class _Password extends StatelessWidget {

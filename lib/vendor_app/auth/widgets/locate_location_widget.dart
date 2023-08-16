@@ -30,32 +30,47 @@ class _LocateLocationWidgetState extends State<LocateLocationWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SvgPicture.asset(
-          iPana,
-          width: 30.w,
-          height: 30.h,
-        ),
-        vSpace(5),
-        Text(trans(context).locateVendorAdress,
-            style: bold.copyWith(fontSize: 16.sp)),
-        vSpace(2),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 5.w),
-          child: Text(
-            trans(context).unableAddress,
-            textAlign: TextAlign.center,
+    return BlocListener<AuthCubit, AuthState>(
+      listener: (context, state) {
+        if (state.status.isFailure) {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(
+                content: Text(state.errorMessage.isEmpty
+                    ? 'Failure'
+                    : state.errorMessage),
+              ),
+            );
+        }
+      },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SvgPicture.asset(
+            iPana,
+            width: 30.w,
+            height: 30.h,
           ),
-        ),
-        vSpace(3),
-        const _UseCurrentLocation(),
-        vSpace(3),
-        const _CreateStore(),
-        vSpace(3),
-        const _SetCurrentLocation()
-      ],
+          vSpace(5),
+          Text(trans(context).locateVendorAdress,
+              style: bold.copyWith(fontSize: 16.sp)),
+          vSpace(2),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 5.w),
+            child: Text(
+              trans(context).unableAddress,
+              textAlign: TextAlign.center,
+            ),
+          ),
+          vSpace(3),
+          const _UseCurrentLocation(),
+          vSpace(3),
+          const _CreateStore(),
+          vSpace(3),
+          const _SetCurrentLocation()
+        ],
+      ),
     );
   }
 }
@@ -101,12 +116,13 @@ class _UseCurrentLocation extends StatelessWidget {
       builder: (context, state) {
         return ElevatedButton(
           onPressed: () async {
-            await cubit.getCurrentLocation();
+            await cubit.getCurrentLocation(context);
           },
           style: ElevatedButton.styleFrom(
               backgroundColor: orange,
               foregroundColor: white,
               maximumSize: Size(92.w, 7.5.h),
+              minimumSize: Size(92.w, 7.5.h),
               padding: EdgeInsets.symmetric(horizontal: 28.w, vertical: 20),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
@@ -177,18 +193,20 @@ class _CreateStoreState extends State<_CreateStore> {
         return ElevatedButton(
           onPressed: () async {
             if (mounted) {
-              await cubit.createStore();
+              await cubit.createStore(context);
             }
           },
           style: ElevatedButton.styleFrom(
               backgroundColor: orange,
               foregroundColor: white,
               maximumSize: Size(92.w, 7.5.h),
+              minimumSize: Size(91.w, 7.5.h),
               padding: EdgeInsets.symmetric(horizontal: 28.w, vertical: 20),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
               )),
-          child: state.status == FormzSubmissionStatus.inProgress
+          child: state.status == FormzSubmissionStatus.inProgress &&
+                  state.errorMessage != 'loc'
               ? loadingWidget()
               : Text(trans(context).createAccount),
         );

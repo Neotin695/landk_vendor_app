@@ -54,5 +54,10 @@
   "yourLocation": "Your Location",
   "emptyCategory": "Empty Category",
   "pleaseSelectImages": "Please Select Images",
+  
+  "accountCrated": "Created Account successfully, go to sign in",
+  "errorCurrentLocation": "unable to get cuurent location",
+  "errorMapLocation": "please select location from map or click on getCurrnetLocatonButton",
+  "noInternet": "No Internet, connect to internet and try again",
   "signOut": "Sign out"
 }

@@ -10,9 +10,11 @@ Widget vSpace(double height) => SizedBox(height: height.h);
 Widget hSpace(double width) => SizedBox(width: width.h);
 
 Widget loadingWidget() {
-  return SizedBox(
-      height: 5.h, child: const Center(child: CircularProgressIndicator()));
+  return const SizedBox(child: Center(child: CircularProgressIndicator()));
 }
+
+TextDirection directionField(BuildContext context) =>
+    locale(context) ? TextDirection.rtl : TextDirection.ltr;
 
 Alignment autoAlignTop(context) {
   return locale(context) ? Alignment.topRight : Alignment.topLeft;

@@ -41,13 +41,13 @@ class _OnwerInfoWidgetState extends State<OnwerInfoWidget> {
           vSpace(2),
           const AvatarPhoto(),
           vSpace(8),
-          const _FullName(),
+          _FullName(),
           vSpace(2),
-          const _Email(),
+          _Email(),
           vSpace(2),
-          const _Password(),
+          _Password(),
           vSpace(2),
-          const _ConfirmPassword(),
+          _ConfirmPassword(),
           vSpace(3),
           const _NextBtn(),
         ],
@@ -126,14 +126,7 @@ class _NextBtn extends StatelessWidget {
   }
 }
 
-class _FullName extends StatefulWidget {
-  const _FullName();
-
-  @override
-  State<_FullName> createState() => _FullNameState();
-}
-
-class _FullNameState extends State<_FullName> {
+class _FullName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthCubit, AuthState>(
@@ -142,8 +135,8 @@ class _FullNameState extends State<_FullName> {
         return Container(
           margin: EdgeInsets.symmetric(horizontal: 5.w),
           child: TextField(
-            onChanged: (fullName) =>
-                mounted ? cubit.fullNameChanged(fullName) : null,
+            textDirection: directionField(context),
+            onChanged: (fullName) => cubit.fullNameChanged(fullName),
             decoration: InputDecoration(
               prefixIcon: const Icon(Icons.person),
               labelText: trans(context).fullName,
@@ -158,14 +151,7 @@ class _FullNameState extends State<_FullName> {
   }
 }
 
-class _Password extends StatefulWidget {
-  const _Password();
-
-  @override
-  State<_Password> createState() => _PasswordState();
-}
-
-class _PasswordState extends State<_Password> {
+class _Password extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthCubit, AuthState>(
@@ -176,8 +162,8 @@ class _PasswordState extends State<_Password> {
           child: TextField(
             keyboardType: TextInputType.visiblePassword,
             key: const Key('password-input'),
-            onChanged: (password) =>
-                mounted ? cubit.passwordChanged(password) : null,
+            textDirection: directionField(context),
+            onChanged: (password) => cubit.passwordChangedSignUp(password),
             decoration: InputDecoration(
               prefixIcon: const Icon(Icons.password),
               labelText: trans(context).password,
@@ -192,14 +178,7 @@ class _PasswordState extends State<_Password> {
   }
 }
 
-class _ConfirmPassword extends StatefulWidget {
-  const _ConfirmPassword();
-
-  @override
-  State<_ConfirmPassword> createState() => _ConfirmPasswordState();
-}
-
-class _ConfirmPasswordState extends State<_ConfirmPassword> {
+class _ConfirmPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthCubit, AuthState>(
@@ -211,8 +190,8 @@ class _ConfirmPasswordState extends State<_ConfirmPassword> {
           child: TextField(
             keyboardType: TextInputType.visiblePassword,
             key: const Key('password-input'),
-            onChanged: (password) =>
-                mounted ? cubit.confirmedPasswordChanged(password) : null,
+            textDirection: directionField(context),
+            onChanged: (password) => cubit.confirmedPasswordChanged(password),
             decoration: InputDecoration(
               prefixIcon: const Icon(Icons.password),
               labelText: trans(context).password,
@@ -227,14 +206,7 @@ class _ConfirmPasswordState extends State<_ConfirmPassword> {
   }
 }
 
-class _Email extends StatefulWidget {
-  const _Email();
-
-  @override
-  State<_Email> createState() => _EmailState();
-}
-
-class _EmailState extends State<_Email> {
+class _Email extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthCubit, AuthState>(
@@ -244,7 +216,8 @@ class _EmailState extends State<_Email> {
           margin: EdgeInsets.symmetric(horizontal: 5.w),
           child: TextField(
             key: const Key('email-input'),
-            onChanged: (email) => mounted ? cubit.emailChanged(email) : null,
+            textDirection: directionField(context),
+            onChanged: (email) => cubit.emailChangedSignUp(email),
             decoration: InputDecoration(
               prefixIcon: const Icon(Icons.email),
               labelText: trans(context).email,

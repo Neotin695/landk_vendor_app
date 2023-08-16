@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vendor_app/core/shared/offline_widget.dart';
 
 import '../cubit/auth_cubit.dart';
 import '../widgets/locate_location_widget.dart';
@@ -24,14 +25,16 @@ class _CreateAccountViewState extends State<CreateAccountView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: PageView(
-          controller: cubit.controller,
-          children: const [
-            StoreInfoWidget(),
-            OnwerInfoWidget(),
-            LocateLocationWidget(),
-          ],
+      body: OfflineWidget(
+        child: SafeArea(
+          child: PageView(
+            controller: cubit.controller,
+            children: const [
+              StoreInfoWidget(),
+              OnwerInfoWidget(),
+              LocateLocationWidget(),
+            ],
+          ),
         ),
       ),
     );

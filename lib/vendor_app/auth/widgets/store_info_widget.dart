@@ -220,6 +220,7 @@ class _Name extends StatelessWidget {
         return Container(
           margin: EdgeInsets.symmetric(horizontal: 5.w),
           child: TextField(
+            textDirection: directionField(context),
             onChanged: (name) => cubit.nameChanged(name),
             decoration: InputDecoration(
               prefixIcon: const Icon(Icons.email),
@@ -271,6 +272,7 @@ class _Address extends StatelessWidget {
         return Container(
           margin: EdgeInsets.symmetric(horizontal: 5.w),
           child: TextField(
+            textDirection: directionField(context),
             onChanged: (address) => cubit.addressChanged(address),
             decoration: InputDecoration(
               prefixIcon: const Icon(Icons.location_city),

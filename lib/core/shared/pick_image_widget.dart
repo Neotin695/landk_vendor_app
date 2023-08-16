@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import '../theme/colors/landk_colors.dart';
 
+// ignore: must_be_immutable
 class PickImageWidget extends StatelessWidget {
   PickImageWidget({
     super.key,

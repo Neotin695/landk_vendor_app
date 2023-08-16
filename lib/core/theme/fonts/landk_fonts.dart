@@ -7,8 +7,8 @@ TextStyle h2 = TextStyle(
     fontSize: 25.sp, fontFamily: 'Tajawal', fontWeight: FontWeight.w800);
 TextStyle h3 = TextStyle(
     fontSize: 20.sp, fontFamily: 'Tajawal', fontWeight: FontWeight.w700);
-TextStyle h4 = const TextStyle(
-    fontSize: 15, fontFamily: 'Tajawal', fontWeight: FontWeight.w500);
+TextStyle h4 = TextStyle(
+    fontSize: 15.sp, fontFamily: 'Tajawal', fontWeight: FontWeight.w500);
 TextStyle h5 = TextStyle(
     fontSize: 10.sp, fontFamily: 'Tajawal', fontWeight: FontWeight.w400);
 TextStyle h6 = TextStyle(

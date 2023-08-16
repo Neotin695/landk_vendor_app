@@ -15,4 +15,5 @@ var iPana = 'assets/icons/pana.svg';
 var iPersonPng = 'assets/images/person_3d.png';
 var iLogoOrange = 'assets/icons/logo_orange.svg';
 var iLogo = 'assets/icons/logo.svg';
+var iServerDown = 'assets/icons/server_down.svg';
 var iProduct = 'assets/icons/product.svg';

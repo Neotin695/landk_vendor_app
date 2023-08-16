@@ -53,5 +53,9 @@
   "yourLocation": "عنوانك",
   "emptyCategory": "الفئات فراغة",
   "pleaseSelectImages": "رجاءً اختر الصور",
+  "accountCrated": "تم انشاء حسابك بنجاح اذهب لتسجيل الدخول",
+  "errorCurrentLocation": "خطاء في تحديد موقعك الحالي",
+  "errorMapLocation": "راجاءً حدد موقعك علي الخريطه او اضغط علي تحديد الموقع الحالي",
+  "noInternet": "لا اتصال بلانترنت, اتصل بالنترنت واعد المحاوله",
   "signOut": "تسجيل الخروج"
 }
