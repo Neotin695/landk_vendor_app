@@ -1,6 +1,7 @@
 var iHome = 'assets/icons/home.svg';
 var iBanner = 'assets/icons/banner.svg';
 var iCategory = 'assets/icons/category.svg';
+var iMenu = 'assets/icons/menu.svg';
 var iDelegates = 'assets/icons/delegates.svg';
 var iOrder = 'assets/icons/order.svg';
 var iUsers = 'assets/icons/person_.svg';
@@ -15,5 +16,5 @@ var iPana = 'assets/icons/pana.svg';
 var iPersonPng = 'assets/images/person_3d.png';
 var iLogoOrange = 'assets/icons/logo_orange.svg';
 var iLogo = 'assets/icons/logo.svg';
-var iServerDown = 'assets/icons/server_down.svg';
+var iServerDown = 'assets/icons/noIneternet.svg';
 var iProduct = 'assets/icons/product.svg';

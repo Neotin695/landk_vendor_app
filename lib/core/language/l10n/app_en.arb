@@ -15,7 +15,6 @@
   "vendorName": "Store Name",
   "vendorAddress": "Store Adress",
   "category": "category",
- 
   "logo": "logo",
   "imageCover": "Cover Image",
   "next": "Next",
@@ -54,10 +53,16 @@
   "yourLocation": "Your Location",
   "emptyCategory": "Empty Category",
   "pleaseSelectImages": "Please Select Images",
-  
   "accountCrated": "Created Account successfully, go to sign in",
   "errorCurrentLocation": "unable to get cuurent location",
   "errorMapLocation": "please select location from map or click on getCurrnetLocatonButton",
   "noInternet": "No Internet, connect to internet and try again",
+  "view": "View",
+  "termsAndConditions": "Terms And Conditions",
+  "complaintsAndSuggestions": "Complaints And Suggestions",
+  "aboutLandk": "About Landk",
+  "home": "Home",
+  "store": "Store",
+  "selectLanguage": "Select Language",
   "signOut": "Sign out"
 }

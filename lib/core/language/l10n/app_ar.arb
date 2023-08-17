@@ -57,5 +57,12 @@
   "errorCurrentLocation": "خطاء في تحديد موقعك الحالي",
   "errorMapLocation": "راجاءً حدد موقعك علي الخريطه او اضغط علي تحديد الموقع الحالي",
   "noInternet": "لا اتصال بلانترنت, اتصل بالنترنت واعد المحاوله",
+  "view": "العرض",
+  "termsAndConditions": "الشروط والاحكام",
+  "complaintsAndSuggestions": "الشكاوي والاقتراحات",
+  "aboutLandk": "حول لعندك",
+  "home": "الرائسية",
+  "store": "المتجر",
+  "selectLanguage": "اختر اللغة",
   "signOut": "تسجيل الخروج"
 }
