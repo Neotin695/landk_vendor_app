@@ -14,6 +14,7 @@ class Product extends Equatable {
   final int quantity;
   final int discount;
   final List<Reivew> reviews;
+
   const Product({
     required this.id,
     required this.title,
@@ -27,6 +28,20 @@ class Product extends Equatable {
     required this.discount,
     required this.reviews,
   });
+
+  static Product empty() => const Product(
+        id: '',
+        title: '',
+        description: '',
+        coverUrl: '',
+        images: [],
+        soldOut: false,
+        category: '',
+        price: 0,
+        quantity: 0,
+        discount: 0,
+        reviews: [],
+      );
 
   @override
   List<Object?> get props => [
