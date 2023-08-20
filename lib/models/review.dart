@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
 
-class Reivew extends Equatable {
+class Review extends Equatable {
   final String id;
   final String user;
   final double rate;
   final String description;
-  const Reivew({
+  const Review({
     required this.id,
     required this.user,
     required this.rate,
@@ -21,8 +21,8 @@ class Reivew extends Equatable {
     };
   }
 
-  factory Reivew.fromMap(Map<String, dynamic> map) {
-    return Reivew(
+  factory Review.fromMap(Map<String, dynamic> map) {
+    return Review(
       id: map['id'] as String,
       user: map['user'] as String,
       rate: map['rate'] as double,

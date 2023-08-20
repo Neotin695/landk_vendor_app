@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:vendor_app/models/review.dart';
 
-import '../../../../../models/reivew.dart';
 
 class Product extends Equatable {
   final String id;
@@ -13,7 +13,7 @@ class Product extends Equatable {
   final double price;
   final int quantity;
   final int discount;
-  final List<Reivew> reviews;
+  final List<Review> reviews;
 
   const Product({
     required this.id,
@@ -86,9 +86,9 @@ class Product extends Equatable {
       price: map['price'] as double,
       quantity: map['quantity'] as int,
       discount: map['discount'] as int,
-      reviews: List<Reivew>.from(
-        (map['reviews'] as List<int>).map<Reivew>(
-          (x) => Reivew.fromMap(x as Map<String, dynamic>),
+      reviews: List<Review>.from(
+        (map['reviews'] as List<int>).map<Review>(
+          (x) => Review.fromMap(x as Map<String, dynamic>),
         ),
       ),
     );
