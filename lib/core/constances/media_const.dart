@@ -9,6 +9,7 @@ var iPerson = 'assets/icons/person.svg';
 var iCandidates = 'assets/icons/candidates.svg';
 var iDelivery = 'assets/icons/delivery.svg';
 var iOrders = 'assets/icons/orders.svg';
+var iEmpty = 'assets/icons/empty_order.svg';
 var iProducts = 'assets/icons/products.svg';
 var istores = 'assets/icons/store.svg';
 var iStors = 'assets/icons/stors.svg';

@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 
 // ignore: must_be_immutable
@@ -22,6 +23,7 @@ class AddressInfo extends Equatable {
       'latitude': latitude,
       'specialMarque': specialMarque,
     };
+
   }
 
   factory AddressInfo.fromMap(Map<String, dynamic> map) {
@@ -31,4 +33,7 @@ class AddressInfo extends Equatable {
       specialMarque: map['specialMarque'] as String,
     );
   }
+
+  @override
+  bool get stringify => true;
 }

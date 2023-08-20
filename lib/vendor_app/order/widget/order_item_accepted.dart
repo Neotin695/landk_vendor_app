@@ -3,19 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:intl/intl.dart';
 import 'package:vendor_app/core/tools/tools_widget.dart';
-import 'package:vendor_app/vendor_app/order/view/preview_page.dart';
 
 import '../bloc/order_bloc.dart';
 import '../repository/src/models/order.dart';
 
-class OrderItem extends StatefulWidget {
-  const OrderItem({super.key, required this.order});
+class OrderItemAccepted extends StatefulWidget {
+  const OrderItemAccepted({super.key, required this.order});
   final Order order;
   @override
-  State<OrderItem> createState() => _OrderItemState();
+  State<OrderItemAccepted> createState() => _OrderItemAcceptedState();
 }
 
-class _OrderItemState extends State<OrderItem> {
+class _OrderItemAcceptedState extends State<OrderItemAccepted> {
   late final OrderBloc bloc;
   @override
   void initState() {
@@ -34,26 +33,18 @@ class _OrderItemState extends State<OrderItem> {
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (_) => PreviewPage(order: widget.order)));
-              },
               leading: Text(widget.order.orderNum),
               title: Text(widget.order.paymentMethod),
-              trailing: Text(DateFormat('yyyy-MM-DD HH:mm a').format(
+              trailing: Text(DateFormat('YY-MM-DD HH:mm A').format(
                   DateTime.fromMillisecondsSinceEpoch(
-                      widget.order.deliveryDate.millisecondsSinceEpoch))),
+                      widget.order.deliveryDate as int))),
             ),
             ListTile(
               leading: Text(widget.order.deliveryPrice.toString()),
-              title:
-                  Text(widget.order.delivered ? 'delivered' : 'not delivered'),
+              title: Text(widget.order.delivered.toString()),
               trailing: Text('${widget.order.productQuantity.length}'),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
                   onPressed: () {

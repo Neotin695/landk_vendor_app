@@ -28,8 +28,6 @@ class OrderRepository implements _OrderRepository {
   Future<void> acceptOrder(String id) async {
     try {
       await _firestore
-          .collection('stores')
-          .doc(_auth.currentUser!.uid)
           .collection('orders')
           .doc(id)
           .update({'acceptable': true});
@@ -41,12 +39,7 @@ class OrderRepository implements _OrderRepository {
   @override
   Stream<List<Order>> fetchAllOrder() {
     try {
-      return _firestore
-          .collection('stores')
-          .doc(_auth.currentUser!.uid)
-          .collection('orders')
-          .snapshots()
-          .map((event) {
+      return _firestore.collection('orders').snapshots().map((event) {
         return List<Order>.from(event.docs.map((e) => Order.fromMap(e.data())));
       });
     } catch (e) {
@@ -95,12 +88,7 @@ class OrderRepository implements _OrderRepository {
   @override
   Future<void> rejectOrder(String id) async {
     try {
-      await _firestore
-          .collection('stores')
-          .doc(_auth.currentUser!.uid)
-          .collection('orders')
-          .doc(id)
-          .delete();
+      await _firestore.collection('orders').doc(id).delete();
     } catch (e) {
       print('rejectOrder: $e');
     }

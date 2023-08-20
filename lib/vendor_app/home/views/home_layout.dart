@@ -85,8 +85,8 @@ class _HomeLayoutState extends State<HomeLayout> {
               iProduct,
               HomeState.products,
               EdgeInsets.only(
-                  right: locale(context) ? 0 : centerPaddingRight,
-                  left: locale(context) ? centerPaddingLeft : 0,
+                  right: locale(context) ? centerPaddingRight : 0,
+                  left: locale(context) ? 0 : centerPaddingLeft,
                   top: topPadding)),
           _bottomItem(iMenu, HomeState.menu,
               EdgeInsets.only(right: rightPadding, top: topPadding)),

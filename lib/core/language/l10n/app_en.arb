@@ -64,5 +64,8 @@
   "home": "Home",
   "store": "Store",
   "selectLanguage": "Select Language",
+  "acceptedOrder": "Accepted Order",
+  "newOrder": "New Order",
+
   "signOut": "Sign out"
 }

@@ -13,7 +13,7 @@ class Order extends Equatable {
   final bool delivered;
   final String customer;
   final String delegate;
-  final FieldValue deliveryDate;
+  final Timestamp deliveryDate;
   final AddressInfo addressInfo;
   final String paymentMethod;
   const Order({
@@ -39,7 +39,7 @@ class Order extends Equatable {
       customer: '',
       delivered: false,
       delegate: '',
-      deliveryDate: FieldValue.serverTimestamp(),
+      deliveryDate: Timestamp.now(),
       addressInfo: AddressInfo.empty(),
       paymentMethod: '');
 
@@ -65,8 +65,8 @@ class Order extends Equatable {
       'orderNum': orderNum,
       'deliveryPrice': deliveryPrice,
       'acceptable': acceptable,
-      'customer': customer,
       'delivered': delivered,
+      'customer': customer,
       'delegate': delegate,
       'deliveryDate': deliveryDate,
       'addressInfo': addressInfo.toMap(),
@@ -78,17 +78,17 @@ class Order extends Equatable {
     return Order(
       id: map['id'] as String,
       productQuantity: List<ProductQuantity>.from(
-        (map['productQuantity'] as List<int>).map<ProductQuantity>(
+        (map['productQuantity']).map<ProductQuantity>(
           (x) => ProductQuantity.fromMap(x as Map<String, dynamic>),
         ),
       ),
-      customer: map['customer'] as String,
       orderNum: map['orderNum'] as String,
-      deliveryPrice: map['deliveryPrice'] as double,
+      deliveryPrice: double.parse(map['deliveryPrice'].toString()),
       acceptable: map['acceptable'] as bool,
       delivered: map['delivered'] as bool,
+      customer: map['customer'] as String,
       delegate: map['delegate'] as String,
-      deliveryDate: map['deliveryDate'] as FieldValue,
+      deliveryDate: map['deliveryDate'] as Timestamp,
       addressInfo:
           AddressInfo.fromMap(map['addressInfo'] as Map<String, dynamic>),
       paymentMethod: map['paymentMethod'] as String,
