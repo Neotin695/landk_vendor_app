@@ -41,6 +41,8 @@ dependencies:
   cool_alert: ^2.0.1
   flutter_offline: ^3.0.0
   spincircle_bottom_bar: ^2.0.0
+  cached_network_image: ^3.2.3
+  uuid: ^3.0.7
 
 dev_dependencies:
   flutter_test:

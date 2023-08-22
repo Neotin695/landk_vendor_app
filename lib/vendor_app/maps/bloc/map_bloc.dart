@@ -8,6 +8,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:vendor_app/vendor_app/maps/map_repository/map_repository.dart';
 
+import '../../../models/delegate.dart';
+
 part 'map_event.dart';
 part 'map_state.dart';
 
@@ -16,10 +18,32 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     on<InitMapController>(_initMapController);
     on<AddMarker>(_addMarker);
     on<GetCurrentLocation>(_getCurrentLocation);
+    on<FetchDelegate>(_fetchDelegate);
     customInfoWindowController = CustomInfoWindowController();
   }
 
+  FutureOr<void> _fetchDelegate(FetchDelegate event, emit) async {
+    //emit(LoadingState());
+    _subscriptionDelegate =
+        mapRepository.fetchDelegate(event.id).listen((event) {
+      delegate = event;
+      if (delegate != Delegate.empty()) {
+       // emit(SuccessState());
+      }
+    });
+  }
+
   bool isShown = false;
+
+  Delegate delegate = Delegate.empty();
+
+  late final StreamSubscription<Delegate> _subscriptionDelegate;
+
+  @override
+  Future<void> close() {
+    _subscriptionDelegate.cancel();
+    return super.close();
+  }
 
   final MapRepository mapRepository;
   LocationData? currentLocation;

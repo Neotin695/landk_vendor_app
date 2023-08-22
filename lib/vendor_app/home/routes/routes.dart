@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vendor_app/vendor_app/home/widgets/home_page.dart';
 import 'package:vendor_app/vendor_app/home/widgets/menu_page.dart';
 import 'package:vendor_app/vendor_app/order/view/order_page.dart';
-import 'package:vendor_app/vendor_app/products/view/products_page.dart';
+import 'package:vendor_app/vendor_app/products/view/product_page.dart';
 import 'package:vendor_app/vendor_app/store/view/store_page.dart';
 
 enum HomeState {
@@ -24,6 +24,6 @@ List<Page> onGenerateHomePage(HomeState state, List<Page> pages) {
     case HomeState.menu:
       return [MenuPage.page()];
     case HomeState.products:
-      return [ProductsPage.page()];
+      return [ProductPage.page()];
   }
 }

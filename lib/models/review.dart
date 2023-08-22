@@ -25,7 +25,7 @@ class Review extends Equatable {
     return Review(
       id: map['id'] as String,
       user: map['user'] as String,
-      rate: map['rate'] as double,
+      rate: double.parse(map['rate'].toString()),
       description: map['description'] as String,
     );
   }

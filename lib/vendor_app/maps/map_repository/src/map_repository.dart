@@ -1,14 +1,19 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:vendor_app/core/services/permission_handler/src/permission_handler.dart';
+
+import '../../../../models/delegate.dart';
 
 abstract class _MapRepository {
   Future<void> getCurrentLocation();
   Map<String, Marker> addMarker(String id, LatLng latLng, title, subTitle);
 
   GoogleMapController initMapController(GoogleMapController mapController);
+
+  Stream<Delegate> fetchDelegate(String id);
 }
 
 class MapRepository implements _MapRepository {
@@ -16,6 +21,8 @@ class MapRepository implements _MapRepository {
   late final Location _location;
 
   late final PermissionHandler _permissionHandler;
+
+  late final FirebaseFirestore _firestore;
 
   // map setup
   GoogleMapController? mapController;
@@ -30,6 +37,7 @@ class MapRepository implements _MapRepository {
     controller = Completer();
     _permissionHandler = PermissionHandler();
     _location = Location();
+    _firestore = FirebaseFirestore.instance;
   }
 
   @override
@@ -66,5 +74,18 @@ class MapRepository implements _MapRepository {
   GoogleMapController initMapController(GoogleMapController mapController) {
     mapController = mapController;
     return mapController;
+  }
+
+  @override
+  Stream<Delegate> fetchDelegate(String id) {
+    try {
+      return _firestore
+          .collection('delegates')
+          .doc(id)
+          .snapshots()
+          .map((event) => Delegate.fromMap(event.data()!));
+    } catch (e) {
+      return Stream.error(e);
+    }
   }
 }

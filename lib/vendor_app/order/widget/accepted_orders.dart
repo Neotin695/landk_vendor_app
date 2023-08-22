@@ -4,7 +4,7 @@ import 'package:vendor_app/core/constances/media_const.dart';
 import 'package:vendor_app/core/shared/empty_data.dart';
 import 'package:vendor_app/vendor_app/order/bloc/order_bloc.dart';
 import 'package:vendor_app/vendor_app/order/repository/src/models/order.dart';
-import 'package:vendor_app/vendor_app/order/widget/order_item.dart';
+import 'package:vendor_app/vendor_app/order/widget/order_item_accepted.dart';
 
 class AcceptedOrder extends StatefulWidget {
   const AcceptedOrder({super.key, required this.orders});
@@ -34,9 +34,9 @@ class _AcceptedOrderState extends State<AcceptedOrder> {
             itemCount: orders.length,
             itemBuilder: (context, index) {
               final order = orders[index];
-              return OrderItem(order: order);
+              return OrderItemAccepted(order: order);
             },
           )
-        : EmptyData(assetIcon: iEmpty,title:'no Order');
+        : EmptyData(assetIcon: iEmpty, title: 'no Order');
   }
 }

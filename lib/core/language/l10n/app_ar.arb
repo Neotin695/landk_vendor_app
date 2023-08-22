@@ -28,7 +28,7 @@
   "dashBoard": "لوحة القيادة",
   "order": "الطلبات",
   "users": "المستخدمين",
-  "delegates": "المندوبون",
+
   "categories": "الفئات",
   "vendors": "المتاجر",
   "product": "ادارة المنتجات",
@@ -66,6 +66,20 @@
   "selectLanguage": "اختر اللغة",
   "acceptedOrder": "الطالبات المقبوله",
   "newOrder": "الطالبات الجديدة",
-
+  "tracking": "تتبع الطلب",
+  "deliveryPrice": "سعر التوصيل",
+  "paymentMethod": "طريقة الدفع",
+  "location": "العنوان",
+  "orderState": "حالة الطلب",
+  "date": "التاريخ",
+  "customer": "العميل",
+  "deliveryMan": "المندوب",
+ "orderNum":"رقم الطلب",
+ "delivered": "تم التوصيل",
+  "noDelivered": "لم يتم التوصيل بعد",
+  "activeProduct": "المنتاجات النشطة",
+  "disabledProduct": "المنتاجات الموقوفه",
+  "noActiveProdcut": "ليس لديك اي منتج نشط الان",
+  "noDisabledProduct": "ليس لديك اي منتج موقوف الان",
   "signOut": "تسجيل الخروج"
 }

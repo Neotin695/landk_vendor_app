@@ -23,7 +23,6 @@ class AddressInfo extends Equatable {
       'latitude': latitude,
       'specialMarque': specialMarque,
     };
-
   }
 
   factory AddressInfo.fromMap(Map<String, dynamic> map) {
@@ -36,4 +35,9 @@ class AddressInfo extends Equatable {
 
   @override
   bool get stringify => true;
+
+  @override
+  String toString() {
+    return specialMarque.toString();
+  }
 }

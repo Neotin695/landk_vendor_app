@@ -1,4 +1,3 @@
-
 import 'package:equatable/equatable.dart';
 
 import '../../../../../models/model.dart';
@@ -14,12 +13,12 @@ class Delegate extends Equatable {
   String phoneNum;
   String email;
   String token;
+  String vehicle;
   bool active;
   bool acceptable;
   bool isEmailVerified;
   bool available;
   AddressInfo location;
-  String vehicle;
 
   Delegate({
     required this.id,
@@ -98,21 +97,21 @@ class Delegate extends Equatable {
 
   factory Delegate.fromMap(Map<String, dynamic> map) {
     return Delegate(
-      id: map['id'] as String,
-      photoUrl: map['photoUrl'] as String,
-      name: map['name'] as String,
-      idCard: IdCard.fromMap(map['idCard'] as Map<String, dynamic>),
-      phoneNum: map['phoneNum'] as String,
-      email: map['email'] as String,
-      token: map['token'] as String,
       acceptable: map['acceptable'] as bool,
       active: map['active'] as bool,
-      isEmailVerified: map['isEmailVerified'] as bool,
-      location: AddressInfo.fromMap(map['location'] as Map<String, dynamic>),
       available: map['available'] as bool,
       birthOfDate: map['birthOfDate'] as String,
+      email: map['email'] as String,
+      id: map['id'] as String,
+      idCard: IdCard.fromMap(map['idCard'] as Map<String, dynamic>),
+      isEmailVerified: map['isEmailVerified'] as bool,
+      location: AddressInfo.fromMap(map['location'] as Map<String, dynamic>),
+      name: map['name'] as String,
+      phoneNum: map['phoneNum'] as String,
+      photoUrl: map['photoUrl'] as String,
+      token: map['token'] as String,
+      vehicle: map['vehicle'] as String,
       vehicleNum: map['vehicleNum'] as String,
-      vehicle: map['vehicleImages'] as String,
     );
   }
 }

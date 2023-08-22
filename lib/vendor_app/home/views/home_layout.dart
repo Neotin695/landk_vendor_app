@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:vendor_app/core/constances/media_const.dart';
 import 'package:vendor_app/core/theme/colors/landk_colors.dart';
+import 'package:vendor_app/vendor_app/order/view/order_preview_view.dart';
 
 import '../../../core/tools/tools_widget.dart';
 import '../routes/routes.dart';
@@ -101,6 +102,9 @@ class _HomeLayoutState extends State<HomeLayout> {
       child: IconButton(
         onPressed: () {
           controller.update((value) => state);
+          if (key.currentContext != null) {
+            Navigator.pop(key.currentContext!);
+          }
           setState(() {});
         },
         icon: SvgPicture.asset(

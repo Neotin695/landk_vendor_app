@@ -98,17 +98,17 @@ class OrderRepository implements _OrderRepository {
   Future<List<Product>> fetchAllProducts(List<String> ids) async {
     List<Product> products = [];
     try {
-      for (var element in ids) {
-        await _firestore
-            .collection('products')
-            .where('id', isEqualTo: element)
-            .get()
-            .then((value) {
-          value.docs.map((e) {
-            products.add(Product.fromMap(e.data()));
-          });
-        });
-      }
+      // for (var element in ids) {
+      await _firestore
+          .collection('products')
+          .where('id', whereIn: ids)
+          .get()
+          .then((value) {
+        products = List<Product>.from(
+            value.docs.map((e) => Product.fromMap(e.data())));
+        // value.docs.map((e) {});
+      });
+      // }
       return products;
     } catch (e) {
       print('fetchAllProducts: $e');

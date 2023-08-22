@@ -71,7 +71,9 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
   FutureOr<void> _fetchProduct(FetchProduct event, emit) async {
     emit(OrderLoadingState());
     products = await _orderRepository.fetchAllProducts(event.ids);
-    emit(OrderSuccessState());
+    if (products.isNotEmpty) {
+      emit(OrderSuccessState());
+    }
   }
 
   FutureOr<void> _acceptOrder(AcceptOrder event, emit) async {

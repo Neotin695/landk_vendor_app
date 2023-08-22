@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:intl/intl.dart';
 import 'package:vendor_app/core/tools/tools_widget.dart';
-import 'package:vendor_app/vendor_app/order/view/preview_page.dart';
+import 'package:vendor_app/vendor_app/order/repository/order_repository.dart';
+import 'package:vendor_app/vendor_app/order/view/order_preview_page.dart';
 
 import '../bloc/order_bloc.dart';
-import '../repository/src/models/order.dart';
 
 class OrderItem extends StatefulWidget {
   const OrderItem({super.key, required this.order});
@@ -27,49 +27,71 @@ class _OrderItemState extends State<OrderItem> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 3.h),
-      child: Card(
-        elevation: 5,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (_) => PreviewPage(order: widget.order)));
-              },
-              leading: Text(widget.order.orderNum),
-              title: Text(widget.order.paymentMethod),
-              trailing: Text(DateFormat('yyyy-MM-DD HH:mm a').format(
-                  DateTime.fromMillisecondsSinceEpoch(
-                      widget.order.deliveryDate.millisecondsSinceEpoch))),
-            ),
-            ListTile(
-              leading: Text(widget.order.deliveryPrice.toString()),
-              title:
-                  Text(widget.order.delivered ? 'delivered' : 'not delivered'),
-              trailing: Text('${widget.order.productQuantity.length}'),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (_) => OrderPreviewPage(
+                      order: widget.order,
+                      orderRepository: OrderRepository())));
+        },
+        child: Card(
+          elevation: 5,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 13, horizontal: 8),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                ElevatedButton(
-                  onPressed: () {
-                    bloc.add(AcceptOrder(id: widget.order.id));
-                  },
-                  child: Text(trans(context).accept),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                        '${trans(context).deliveryPrice}: ${widget.order.deliveryPrice}'),
+                    Text(
+                        '${trans(context).paymentMethod}: ${widget.order.paymentMethod}'),
+                  ],
                 ),
-                OutlinedButton(
-                  onPressed: () {
-                    bloc.add(RejectOrder(id: widget.order.id));
-                  },
-                  child: Text(trans(context).reject),
+                vSpace(2),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      '${trans(context).location}: ${widget.order.addressInfo}',
+                    ),
+                  ],
                 ),
+                vSpace(2),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      '${trans(context).date}: ${(DateFormat('yyyy-MM-DD HH:mm a').format(DateTime.fromMillisecondsSinceEpoch(widget.order.deliveryDate.millisecondsSinceEpoch)))}',
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        bloc.add(AcceptOrder(id: widget.order.id));
+                      },
+                      child: Text(trans(context).accept),
+                    ),
+                    OutlinedButton(
+                      onPressed: () {
+                        bloc.add(RejectOrder(id: widget.order.id));
+                      },
+                      child: Text(trans(context).reject),
+                    ),
+                  ],
+                )
               ],
-            )
-          ],
+            ),
+          ),
         ),
       ),
     );

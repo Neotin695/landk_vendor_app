@@ -19,6 +19,13 @@ class InitMapController extends MapEvent {
 
 class GetCurrentLocation extends MapEvent {}
 
+class FetchDelegate extends MapEvent {
+  final String id;
+  const FetchDelegate({
+    required this.id,
+  });
+}
+
 class CheckMarker extends MapEvent {}
 
 class AddMarker extends MapEvent {
