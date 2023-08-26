@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:vendor_app/core/constances/media_const.dart';
+import 'package:vendor_app/core/theme/colors/landk_colors.dart';
 import 'package:vendor_app/core/tools/tools_widget.dart';
 import 'package:vendor_app/vendor_app/maps/bloc/map_bloc.dart';
 import 'package:vendor_app/vendor_app/order/view/order_preview_view.dart';
@@ -47,34 +48,8 @@ class _MapViewState extends State<TrackMapView> {
                 alignment: Alignment.bottomCenter,
                 children: [
                   _GoogleMap(bloc: bloc),
-                  Positioned(
-                    bottom: 30,
-                    child: SizedBox(
-                      width: 75.w,
-                      height: 10.h,
-                      child: Card(
-                        elevation: 5,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: ListTile(
-                          leading: bloc.delegate.photoUrl.isEmpty
-                              ? SvgPicture.asset(
-                                  iPerson,
-                                )
-                              : CachedNetworkImage(
-                                  imageUrl: bloc.delegate.photoUrl,
-                                  placeholder: (context, url) =>
-                                      const CircularProgressIndicator(),
-                                  errorWidget: (context, url, error) =>
-                                      const Icon(Icons.error),
-                                ),
-                          title: Text(bloc.delegate.name),
-                          subtitle: Text(bloc.delegate.phoneNum),
-                        ),
-                      ),
-                    ),
-                  ),
+                  _toolMapType(),
+                  _windowDelegate(),
                 ],
               );
             } else if (state is LoadingState) {
@@ -83,6 +58,78 @@ class _MapViewState extends State<TrackMapView> {
               return empty();
             }
           },
+        ),
+      ),
+    );
+  }
+
+  Align _toolMapType() {
+    return Align(
+      alignment: Alignment.topRight,
+      child: Card(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+                onPressed: () {
+                  bloc.mapType = MapType.satellite;
+                  setState(() {});
+                },
+                icon: Icon(
+                  Icons.satellite,
+                  color: orange,
+                )),
+            IconButton(
+                onPressed: () {
+                  bloc.mapType = MapType.terrain;
+                  setState(() {});
+                },
+                icon: Icon(
+                  Icons.terrain,
+                  color: orange,
+                )),
+            IconButton(
+                onPressed: () {
+                  bloc.mapType = MapType.normal;
+                  setState(() {});
+                },
+                icon: Icon(
+                  Icons.map,
+                  color: orange,
+                ))
+          ],
+        ),
+      ),
+    );
+  }
+
+  Positioned _windowDelegate() {
+    return Positioned(
+      bottom: 30,
+      child: SizedBox(
+        width: 75.w,
+        height: 10.h,
+        child: Card(
+          elevation: 5,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: ListTile(
+            leading: bloc.delegate.photoUrl.isEmpty
+                ? SvgPicture.asset(
+                    iPerson,
+                  )
+                : CachedNetworkImage(
+                    imageUrl: bloc.delegate.photoUrl,
+                    placeholder: (context, url) =>
+                        const CircularProgressIndicator(),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                  ),
+            title: Text(bloc.delegate.name),
+            subtitle: Text(bloc.delegate.phoneNum),
+          ),
         ),
       ),
     );
@@ -108,22 +155,14 @@ class _GoogleMapState extends State<_GoogleMap> {
       initialCameraPosition: CameraPosition(
           target: LatLng(widget.bloc.delegate.location.latitude,
               widget.bloc.delegate.location.longitude),
-          zoom: 15),
+          zoom: 18),
       onMapCreated: (controller) {
         widget.bloc.add(InitMapController(mapController: controller));
         widget.bloc.add(
           AddMarker(
-            id: 'selectPlace',
+            id: 'delegate',
             latLng: LatLng(widget.bloc.delegate.location.latitude,
                 widget.bloc.delegate.location.longitude),
-          ),
-        );
-      },
-      onTap: (latLng) async {
-        widget.bloc.add(
-          AddMarker(
-            id: 'selectPlace',
-            latLng: latLng,
           ),
         );
       },

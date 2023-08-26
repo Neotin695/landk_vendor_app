@@ -7,11 +7,8 @@ import 'package:sizer/sizer.dart';
 import 'package:vendor_app/core/constances/media_const.dart';
 import 'package:vendor_app/core/theme/fonts/landk_fonts.dart';
 import 'package:vendor_app/core/tools/tools_widget.dart';
-import 'package:vendor_app/vendor_app/maps/map_repository/map_repository.dart';
 import 'package:vendor_app/vendor_app/order/bloc/order_bloc.dart';
 import 'package:vendor_app/vendor_app/order/repository/order_repository.dart';
-
-import '../../maps/view/track_map_page.dart';
 
 class OrderPreviewView extends StatefulWidget {
   const OrderPreviewView({
@@ -178,19 +175,6 @@ class _OrderPreviewViewState extends State<OrderPreviewView> {
                         }).toList(),
                       ),
                       vSpace(6),
-                      Center(
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => TrackMapPage(
-                                        delegate: widget.order.delegate,
-                                        mapRepository: MapRepository())));
-                          },
-                          child: Text(trans(context).tracking),
-                        ),
-                      ),
                     ],
                   ),
                 ),
