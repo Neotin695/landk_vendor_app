@@ -81,5 +81,11 @@
   "disabledProduct": "Disabled Products",
   "noActiveProdcut": "you don't have any active products",
   "noDisabledProduct": "you don't have any disabled products",
+  "review":"Review",
+  "price":"Price",
+  "state":"State",
+  "quantity":"Quantity",
+  "soldOut":"Sold Out",
+  "available":"Available",
   "signOut": "Sign out"
 }

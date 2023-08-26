@@ -4,8 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:uuid/uuid.dart';
-
-import 'models/model.dart';
+import 'package:vendor_app/vendor_app/products/repository/src/models/model.dart';
 
 abstract class _ProductRepository {
   Future<Product> fetchOneProduct(String id);
@@ -45,8 +44,8 @@ class ProductRepository implements _ProductRepository {
   @override
   Stream<List<Product>> fetchAllProducts() {
     try {
-      return _store.collection('products').snapshots().map(
-          (event) => event.docs.map((e) => Product.fromMap(e.data())).toList());
+      return _store.collection('products').snapshots().map((event) =>
+          List<Product>.from(event.docs.map((e) => Product.fromMap(e.data()))));
     } catch (e) {
       print('fetchAllProducts: $e');
       return Stream.error(e);

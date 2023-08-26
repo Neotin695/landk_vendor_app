@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:vendor_app/vendor_app/auth/repository/authentication_repository.dart';
 
 import '../../../../../models/address_info.dart';
 import 'onwer.dart';

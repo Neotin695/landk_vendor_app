@@ -43,6 +43,7 @@ dependencies:
   spincircle_bottom_bar: ^2.0.0
   cached_network_image: ^3.2.3
   uuid: ^3.0.7
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:

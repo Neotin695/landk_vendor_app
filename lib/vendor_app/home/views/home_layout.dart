@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -49,6 +51,27 @@ class _HomeLayoutState extends State<HomeLayout> {
         ),
         title: Text(getTitleOfPage),
         centerTitle: true,
+        actions: [
+          StreamBuilder(
+            stream: FirebaseFirestore.instance
+                .collection('stores')
+                .doc(FirebaseAuth.instance.currentUser!.uid)
+                .snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Switch(
+                    value: (snapshot.data!.data())!['active'],
+                    onChanged: (value) {
+                      FirebaseFirestore.instance
+                          .collection('stores')
+                          .doc(FirebaseAuth.instance.currentUser!.uid)
+                          .update({'active': value});
+                    });
+              }
+              return empty();
+            },
+          )
+        ],
       ),
       body: _FlowPage(controller: controller),
       floatingActionButton: FloatingActionButton(
@@ -102,8 +125,8 @@ class _HomeLayoutState extends State<HomeLayout> {
       child: IconButton(
         onPressed: () {
           controller.update((value) => state);
-          if (key.currentContext != null) {
-            Navigator.pop(key.currentContext!);
+          if (customKey.currentContext != null) {
+            Navigator.pop(customKey.currentContext!);
           }
           setState(() {});
         },

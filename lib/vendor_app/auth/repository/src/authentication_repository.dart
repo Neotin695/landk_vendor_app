@@ -7,6 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../../../core/services/cache/cache.dart';
+import '../../../store/repository/src/models/store.dart';
 import 'models/models.dart';
 
 abstract class _AuthenticationRepository {

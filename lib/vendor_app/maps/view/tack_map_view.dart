@@ -38,7 +38,7 @@ class _MapViewState extends State<TrackMapView> {
   Widget build(BuildContext context) {
     context.read<MapBloc>().add(GetCurrentLocation());
     return Scaffold(
-      key: key,
+      key: customKey,
       body: SafeArea(
         child: BlocBuilder<MapBloc, MapState>(
           builder: (context, state) {

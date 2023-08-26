@@ -57,6 +57,7 @@ class ProductsBloc extends Bloc<ProductsEvent, Productstate> {
   }
 
   FutureOr<void> _insertProduct(InsertProduct event, emit) async {}
+
   FutureOr<void> _updateProduct(UpdateProduct event, emit) async {
     emit(Productstate.loading);
     await productRepository
@@ -72,7 +73,7 @@ class ProductsBloc extends Bloc<ProductsEvent, Productstate> {
     await productRepository
         .toggleActiveProduct(event.id, event.state)
         .then((value) {
-      emit(Productstate.success);
+      emit(Productstate.successData);
       return;
     });
   }

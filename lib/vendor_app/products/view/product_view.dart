@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vendor_app/core/constances/media_const.dart';
+import 'package:vendor_app/core/shared/empty_data.dart';
 import 'package:vendor_app/core/tools/tools_widget.dart';
 
 import '../bloc/products_bloc.dart';
@@ -20,9 +22,8 @@ class _ProductViewState extends State<ProductView>
 
   @override
   void initState() {
-    _tabController = TabController(length: 3, vsync: this);
-    bloc = BlocProvider.of<ProductsBloc>(context);
-
+    _tabController = TabController(length: 2, vsync: this);
+    bloc = context.read<ProductsBloc>();
     super.initState();
   }
 
@@ -36,16 +37,24 @@ class _ProductViewState extends State<ProductView>
           Tab(text: trans(context).disabledProduct),
         ],
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          ActiveProducts(
-            procucts: bloc.products,
-          ),
-          DisabledProduct(
-            procucts: bloc.products,
-          ),
-        ],
+      body: BlocBuilder<ProductsBloc, Productstate>(
+        builder: (context, state) {
+          if (state == Productstate.successData) {
+            return TabBarView(
+              controller: _tabController,
+              children: [
+                ActiveProducts(
+                  products: bloc.products,
+                ),
+                DisabledProduct(
+                  products: bloc.products,
+                ),
+              ],
+            );
+          }
+          return EmptyData(
+              assetIcon: iEmpty, title: trans(context).noActiveProdcut);
+        },
       ),
     );
   }

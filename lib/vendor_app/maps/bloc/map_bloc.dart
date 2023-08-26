@@ -23,12 +23,12 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   }
 
   FutureOr<void> _fetchDelegate(FetchDelegate event, emit) async {
-    //emit(LoadingState());
+    // emit(LoadingState());
     _subscriptionDelegate =
         mapRepository.fetchDelegate(event.id).listen((event) {
       delegate = event;
       if (delegate != Delegate.empty()) {
-       // emit(SuccessState());
+        //emit(SuccessState());
       }
     });
   }

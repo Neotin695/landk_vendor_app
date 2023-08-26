@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/products_bloc.dart';
 import '../repository/product_repository.dart';
+import 'product_view.dart';
 
 class ProductPage extends StatelessWidget {
   static Page page() => MaterialPage(
@@ -19,7 +20,7 @@ class ProductPage extends StatelessWidget {
       value: repository,
       child: BlocProvider(
         create: (context) => ProductsBloc(repository),
-        child: Container(),
+        child: const ProductView(),
       ),
     );
   }

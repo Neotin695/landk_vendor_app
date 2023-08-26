@@ -45,26 +45,20 @@ class _ProductItemState extends State<ProductItem> {
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              ListTile(
-                leading: CachedNetworkImage(
-                  imageUrl: widget.product.coverUrl,
-                  placeholder: (context, url) =>
-                      const CircularProgressIndicator(),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                ),
-                title: Text(widget.product.title),
-                subtitle: Text(widget.product.description),
-                trailing: Text(widget.product.price.toString()),
-              ),
-              Switch(
-                  value: widget.product.active,
-                  onChanged: (value) {
-                    bloc.add(ToggleActiveProduct(
-                        id: widget.product.id, state: value));
-                  })
-            ],
+          child: ListTile(
+            leading: CachedNetworkImage(
+              imageUrl: widget.product.coverUrl,
+              placeholder: (context, url) => const CircularProgressIndicator(),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+            ),
+            title: Text(widget.product.title),
+            subtitle: Text(widget.product.description),
+            trailing: Switch(
+                value: widget.product.active,
+                onChanged: (value) {
+                  bloc.add(
+                      ToggleActiveProduct(id: widget.product.id, state: value));
+                }),
           ),
         ),
       ),

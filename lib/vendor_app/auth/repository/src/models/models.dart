@@ -1,3 +1,2 @@
 export 'user.dart';
-export 'onwer.dart';
-export 'store.dart';
+export '../../../../store/repository/store_reository.dart';

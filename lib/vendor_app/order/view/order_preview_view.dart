@@ -25,7 +25,7 @@ class OrderPreviewView extends StatefulWidget {
   State<OrderPreviewView> createState() => _OrderPreviewViewState();
 }
 
-final GlobalKey<ScaffoldState> key = GlobalKey();
+final GlobalKey<ScaffoldState> customKey = GlobalKey();
 
 class _OrderPreviewViewState extends State<OrderPreviewView> {
   late final OrderBloc bloc;
@@ -36,14 +36,9 @@ class _OrderPreviewViewState extends State<OrderPreviewView> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: key,
+      key: customKey,
       body: BlocBuilder<OrderBloc, OrderState>(
         builder: (context, state) {
           return SingleChildScrollView(

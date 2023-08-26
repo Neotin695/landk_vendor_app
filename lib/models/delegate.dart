@@ -7,7 +7,7 @@ class Delegate extends Equatable {
   String id;
   String photoUrl;
   String birthOfDate;
-  String vehicleNum;
+
   String name;
   IdCard idCard;
   String phoneNum;
@@ -34,7 +34,6 @@ class Delegate extends Equatable {
     required this.location,
     required this.available,
     required this.birthOfDate,
-    required this.vehicleNum,
     required this.vehicle,
   });
 
@@ -52,7 +51,6 @@ class Delegate extends Equatable {
         location: AddressInfo.empty(),
         available: false,
         birthOfDate: '',
-        vehicleNum: '',
         vehicle: '',
       );
 
@@ -71,7 +69,6 @@ class Delegate extends Equatable {
         acceptable,
         available,
         birthOfDate,
-        vehicleNum,
         vehicle
       ];
 
@@ -90,7 +87,6 @@ class Delegate extends Equatable {
       'location': location.toMap(),
       'available': available,
       'birthOfDate': birthOfDate,
-      'vehicleNum': vehicleNum,
       'vehicle': vehicle,
     };
   }
@@ -111,7 +107,6 @@ class Delegate extends Equatable {
       photoUrl: map['photoUrl'] as String,
       token: map['token'] as String,
       vehicle: map['vehicle'] as String,
-      vehicleNum: map['vehicleNum'] as String,
     );
   }
 }

@@ -15,6 +15,8 @@ import 'package:vendor_app/vendor_app/maps/map_repository/map_repository.dart';
 
 import '../../../core/services/form_input/form_input.dart';
 import '../../maps/view/map_page.dart';
+import '../../store/repository/src/models/onwer.dart';
+import '../../store/repository/src/models/store.dart';
 import '../repository/authentication_repository.dart';
 
 part 'auth_state.dart';

@@ -22,13 +22,14 @@ class _NewOrdersState extends State<NewOrders> {
   @override
   void initState() {
     bloc = context.read<OrderBloc>();
-    orders =
-        widget.orders.where((element) => element.acceptable == false).toList();
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    orders =
+        widget.orders.where((element) => element.acceptable == false).toList();
     return orders.isNotEmpty
         ? ListView.builder(
             itemCount: orders.length,

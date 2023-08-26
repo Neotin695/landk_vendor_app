@@ -81,5 +81,11 @@
   "disabledProduct": "المنتاجات الموقوفه",
   "noActiveProdcut": "ليس لديك اي منتج نشط الان",
   "noDisabledProduct": "ليس لديك اي منتج موقوف الان",
+  "review":"المراجعات",
+  "price":"السعر",
+  "state":"الحاله",
+  "quantity":"العدد",
+  "soldOut":"لقد نفذ",
+  "available":"متوفر",
   "signOut": "تسجيل الخروج"
 }

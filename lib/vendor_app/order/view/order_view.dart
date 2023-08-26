@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vendor_app/core/constances/media_const.dart';
@@ -28,37 +30,57 @@ class _OrderViewState extends State<OrderView> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: TabBar(
-        tabs: [
-          Tab(text: trans(context).newOrder),
-          Tab(text: trans(context).acceptedOrder)
-        ],
-        controller: tabcontroller,
-      ),
-      body: SafeArea(
-        child: BlocBuilder<OrderBloc, OrderState>(
-          builder: (context, state) {
-            if (state is OrderSuccessState) {
-              return TabBarView(
-                controller: tabcontroller,
-                children: [
-                  NewOrders(
-                    orders: bloc.orders,
+    return StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+        stream: FirebaseFirestore.instance
+            .collection('stores')
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            if (snapshot.data!.data()!['active'] == true) {
+              return Scaffold(
+                appBar: TabBar(
+                  tabs: [
+                    Tab(text: trans(context).newOrder),
+                    Tab(text: trans(context).acceptedOrder)
+                  ],
+                  controller: tabcontroller,
+                ),
+                body: SafeArea(
+                  child: BlocBuilder<OrderBloc, OrderState>(
+                    builder: (context, state) {
+                      if (state is OrderSuccessState) {
+                        return TabBarView(
+                          controller: tabcontroller,
+                          children: [
+                            NewOrders(
+                              orders: bloc.orders,
+                            ),
+                            AcceptedOrder(
+                              orders: bloc.orders,
+                            ),
+                          ],
+                        );
+                      }
+                      return EmptyData(
+                        assetIcon: iEmpty,
+                        title: 'no Orders',
+                      );
+                    },
                   ),
-                  AcceptedOrder(
-                    orders: bloc.orders,
-                  ),
-                ],
+                ),
+              );
+            } else {
+              return EmptyData(
+                assetIcon: iServerDown,
+                title: '',
               );
             }
-            return EmptyData(
-              assetIcon: iEmpty,
-              title: 'no Orders',
-            );
-          },
-        ),
-      ),
-    );
+          }
+          return EmptyData(
+            assetIcon: iServerDown,
+            title: '',
+          );
+        });
   }
 }
