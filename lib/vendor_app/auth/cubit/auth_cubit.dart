@@ -51,18 +51,19 @@ class AuthCubit extends Cubit<AuthState> {
         status: FormzSubmissionStatus.inProgress, errorMessage: 'loc'));
     locationData =
         await MapRepository().getCurrentLocation().then((event) async {
-      List<Placemark> placemarks = await placemarkFromCoordinates(
-        event!.latitude!,
-        event.longitude!,
-      );
-      if (placemarks.isNotEmpty) {
-        placeDatals = {
-          'name': placemarks[0].subAdministrativeArea!,
-          'street': placemarks[0].street!,
-          'postalcode': placemarks[0].postalCode!,
-        };
+      if (event != null) {
+        List<Placemark> placemarks = await placemarkFromCoordinates(
+          event.latitude!,
+          event.longitude!,
+        );
+        if (placemarks.isNotEmpty) {
+          placeDatals = {
+            'name': placemarks[0].subAdministrativeArea!,
+            'street': placemarks[0].street!,
+            'postalcode': placemarks[0].postalCode!,
+          };
+        }
       }
-
       return event;
     });
 
@@ -100,7 +101,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> createStore(BuildContext context) async {
     if (logoPath != null && coverPath != null && locationData != null) {
       emit(state.copyWith(
-          status: FormzSubmissionStatus.inProgress, errorMessage: ''));
+          status: FormzSubmissionStatus.inProgress, errorMessage: 'hh'));
       await _authenticationRepository
           .createStore(
             store: _initStore(),

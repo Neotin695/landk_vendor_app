@@ -185,7 +185,8 @@ class AuthenticationRepository implements _AuthenticationRepository {
   Future<String> _uploadImage(String path, storeName) async {
     final file = File(path);
     final task = await _storage
-        .ref(storeName)
+        .ref('stores')
+        .child(storeName)
         .child('${path.split('/').last}.png')
         .putFile(file);
     if (task.state == TaskState.success) {

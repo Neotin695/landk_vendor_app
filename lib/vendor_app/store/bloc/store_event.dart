@@ -6,3 +6,9 @@ sealed class StoreEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class FetchStoreEvent extends StoreEvent {}
+
+class DeleteStoreEvent extends StoreEvent {}
+
+class UpdateStoreEvent extends StoreEvent {}

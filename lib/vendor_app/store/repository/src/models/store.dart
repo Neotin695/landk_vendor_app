@@ -83,10 +83,10 @@ class Store extends Equatable {
       acceptable: map['acceptable'] as bool,
       coverUrl: map['coverUrl'] as String,
       name: map['name'] as String,
-      products: List<String>.from((map['products'].map<String>((e) => e))),
+      products: List<String>.from((map['products'].map((e) => e))),
       addressInfo:
           AddressInfo.fromMap(map['addressInfo'] as Map<String, dynamic>),
-      reviews: List<String>.from(map['reviews'].map<String>((e) => e)),
+      reviews: List<String>.from(map['reviews'].map((e) => e)),
     );
   }
   Store copyWith(

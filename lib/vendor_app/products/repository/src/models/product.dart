@@ -1,13 +1,16 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 
-import 'package:vendor_app/models/review.dart';
+import '../../../../../models/review.dart';
 
 class Product extends Equatable {
   final String id;
-  final String title;
-  final String description;
+  final String titleEn;
+  final String descriptionEn;
+  final String titleAr;
+  final String descriptionAr;
   final String coverUrl;
+  final String storeId;
   final List<String> images;
   final bool soldOut;
   final String category;
@@ -15,12 +18,16 @@ class Product extends Equatable {
   final int quantity;
   final int discount;
   final bool active;
+
   final List<Review> reviews;
 
   const Product({
     required this.id,
-    required this.title,
-    required this.description,
+    required this.titleAr,
+    required this.descriptionAr,
+    required this.titleEn,
+    required this.storeId,
+    required this.descriptionEn,
     required this.coverUrl,
     required this.images,
     required this.active,
@@ -34,8 +41,11 @@ class Product extends Equatable {
 
   static Product empty() => const Product(
         id: '',
-        title: '',
-        description: '',
+        titleEn: '',
+        descriptionEn: '',
+        titleAr: '',
+        storeId: '',
+        descriptionAr: '',
         coverUrl: '',
         images: [],
         soldOut: false,
@@ -47,11 +57,34 @@ class Product extends Equatable {
         reviews: [],
       );
 
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'titleEn': titleEn,
+      'descriptionEn': descriptionEn,
+      'titleAr': titleAr,
+      'descriptionAr': descriptionAr,
+      'coverUrl': coverUrl,
+      'storeId': storeId,
+      'images': images,
+      'soldOut': soldOut,
+      'category': category,
+      'price': price,
+      'quantity': quantity,
+      'discount': discount,
+      'active': active,
+      'reviews': reviews.map((x) => x.toMap()).toList(),
+    };
+  }
+
   @override
   List<Object?> get props => [
         id,
-        title,
-        description,
+        titleAr,
+        descriptionAr,
+        titleEn,
+        storeId,
+        descriptionEn,
         coverUrl,
         images,
         soldOut,
@@ -63,44 +96,34 @@ class Product extends Equatable {
         reviews
       ];
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'id': id,
-      'title': title,
-      'description': description,
-      'coverUrl': coverUrl,
-      'images': images,
-      'active': active,
-      'soldOut': soldOut,
-      'category': category,
-      'price': price,
-      'quantity': quantity,
-      'discount': discount,
-      'reviews': reviews.map((x) => x.toMap()).toList(),
-    };
-  }
-
   factory Product.fromMap(Map<String, dynamic> map) {
     return Product(
-      category: map['category'] as String,
-      coverUrl: map['coverUrl'] as String,
-      description: map['description'] as String,
-      discount: map['discount'] as int,
       id: map['id'] as String,
-      active: map['active'] as bool,
+      titleEn: map['titleEn'] as String,
+      descriptionEn: map['descriptionEn'] as String,
+      titleAr: map['titleAr'] as String,
+      storeId: map['storeId'] as String,
+      descriptionAr: map['descriptionAr'] as String,
+      coverUrl: map['coverUrl'] as String,
       images: List<String>.from(map['images'].map((e) => e)),
+      soldOut: map['soldOut'] as bool,
+      category: map['category'] as String,
       price: map['price'] as double,
       quantity: map['quantity'] as int,
+      discount: map['discount'] as int,
+      active: map['active'] as bool,
       reviews: List<Review>.from(map['reviews'].map((e) => Review.fromMap(e))),
-      soldOut: map['soldOut'] as bool,
-      title: map['title'] as String,
     );
   }
+
   Product copyWith({
     String? id,
-    String? title,
-    String? description,
+    String? titleEn,
+    String? descriptionEn,
+    String? titleAr,
+    String? descriptionAr,
     String? coverUrl,
+    String? storeId,
     List<String>? images,
     bool? soldOut,
     String? category,
@@ -112,9 +135,12 @@ class Product extends Equatable {
   }) {
     return Product(
       id: id ?? this.id,
-      title: title ?? this.title,
-      description: description ?? this.description,
+      titleEn: titleEn ?? this.titleEn,
+      descriptionEn: descriptionEn ?? this.descriptionEn,
+      titleAr: titleAr ?? this.titleAr,
+      descriptionAr: descriptionAr ?? this.descriptionAr,
       coverUrl: coverUrl ?? this.coverUrl,
+      storeId: storeId ?? this.storeId,
       images: images ?? this.images,
       soldOut: soldOut ?? this.soldOut,
       category: category ?? this.category,

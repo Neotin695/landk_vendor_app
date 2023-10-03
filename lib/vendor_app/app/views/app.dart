@@ -64,7 +64,7 @@ class _AppViewState extends State<AppView> {
         supportedLocales: L10n.all,
         locale: Common.prefs.getString('locale') != null
             ? Locale(Common.prefs.getString('locale')!)
-            : null,
+            : const Locale('ar'),
         localizationsDelegates: const [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,

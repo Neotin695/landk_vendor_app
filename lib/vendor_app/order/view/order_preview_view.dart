@@ -162,8 +162,11 @@ class _OrderPreviewViewState extends State<OrderPreviewView> {
                               errorWidget: (context, url, error) =>
                                   const Icon(Icons.error),
                             ),
-                            title: Text(e.title),
-                            subtitle: Text(e.description),
+                            title:
+                                Text(locale(context) ? e.titleAr : e.titleEn),
+                            subtitle: Text(locale(context)
+                                ? e.descriptionAr
+                                : e.descriptionEn),
                             trailing: Text(
                               widget.order.productQuantity
                                   .firstWhere(

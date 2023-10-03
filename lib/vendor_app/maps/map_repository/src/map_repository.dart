@@ -43,9 +43,7 @@ class MapRepository implements _MapRepository {
   @override
   Future<LocationData?> getCurrentLocation() async {
     if (await _permissionHandler.handlePermission()) {
-      await _location.getLocation().then((value) async {
-        _currentLocation = value;
-      });
+      _currentLocation = await _location.getLocation();
 
       _location.onLocationChanged.listen((newLoc) {
         _currentLocation = newLoc;

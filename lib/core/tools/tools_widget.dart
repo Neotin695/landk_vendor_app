@@ -29,8 +29,9 @@ Alignment autoAlignBottom(context) {
 }
 
 bool locale(context) => Common.prefs.getString('locale') == null
-    ? AppLocalizations.of(context)!.localeName != 'ar'
+    ? AppLocalizations.of(context)!.localeName == 'ar'
     : Common.prefs.getString('locale')! == 'ar';
+
 SizedBox empty() => const SizedBox();
 
 AppBar customAppBar(BuildContext context, title) {

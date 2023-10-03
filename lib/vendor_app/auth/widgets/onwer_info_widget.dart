@@ -194,7 +194,7 @@ class _ConfirmPassword extends StatelessWidget {
             onChanged: (password) => cubit.confirmedPasswordChanged(password),
             decoration: InputDecoration(
               prefixIcon: const Icon(Icons.password),
-              labelText: trans(context).password,
+              labelText: trans(context).confirmPassword,
               errorText: state.confirmedPassword.displayError != null
                   ? 'password not match'
                   : null,

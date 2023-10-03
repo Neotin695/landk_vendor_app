@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vendor_app/core/tools/tools_widget.dart';
 import 'package:vendor_app/vendor_app/products/repository/product_repository.dart';
 import 'package:vendor_app/vendor_app/products/view/product_preview_page.dart';
 
@@ -51,8 +52,12 @@ class _ProductItemState extends State<ProductItem> {
               placeholder: (context, url) => const CircularProgressIndicator(),
               errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
-            title: Text(widget.product.title),
-            subtitle: Text(widget.product.description),
+            title: Text(locale(context)
+                ? widget.product.titleAr
+                : widget.product.titleEn),
+            subtitle: Text(locale(context)
+                ? widget.product.descriptionAr
+                : widget.product.descriptionEn),
             trailing: Switch(
                 value: widget.product.active,
                 onChanged: (value) {

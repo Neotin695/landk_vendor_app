@@ -30,23 +30,23 @@ class _OrderViewState extends State<OrderView> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-        stream: FirebaseFirestore.instance
-            .collection('stores')
-            .doc(FirebaseAuth.instance.currentUser!.uid)
-            .snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            if (snapshot.data!.data()!['active'] == true) {
-              return Scaffold(
-                appBar: TabBar(
-                  tabs: [
-                    Tab(text: trans(context).newOrder),
-                    Tab(text: trans(context).acceptedOrder)
-                  ],
-                  controller: tabcontroller,
-                ),
-                body: SafeArea(
+    return Scaffold(
+      appBar: TabBar(
+        tabs: [
+          Tab(text: trans(context).newOrder),
+          Tab(text: trans(context).acceptedOrder)
+        ],
+        controller: tabcontroller,
+      ),
+      body: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+          stream: FirebaseFirestore.instance
+              .collection('stores')
+              .doc(FirebaseAuth.instance.currentUser!.uid)
+              .snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              if (snapshot.data!.data()!['active'] == true) {
+                return SafeArea(
                   child: BlocBuilder<OrderBloc, OrderState>(
                     builder: (context, state) {
                       if (state is OrderSuccessState) {
@@ -68,19 +68,19 @@ class _OrderViewState extends State<OrderView> with TickerProviderStateMixin {
                       );
                     },
                   ),
-                ),
-              );
-            } else {
-              return EmptyData(
-                assetIcon: iServerDown,
-                title: '',
-              );
+                );
+              } else {
+                return EmptyData(
+                  assetIcon: iServerDown,
+                  title: '',
+                );
+              }
             }
-          }
-          return EmptyData(
-            assetIcon: iServerDown,
-            title: '',
-          );
-        });
+            return EmptyData(
+              assetIcon: iServerDown,
+              title: '',
+            );
+          }),
+    );
   }
 }

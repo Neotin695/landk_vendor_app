@@ -20,20 +20,21 @@ class StoreRepository extends _StoreRepository {
         _storeage = FirebaseStorage.instance;
 
   @override
-  Future<void> deleteStore(String id) {
-    // TODO: implement deleteStore
-    throw UnimplementedError();
+  Future<void> deleteStore(String id) async {
+    await _store.collection('stores').doc(id).delete();
   }
 
   @override
   Stream<Store> fetchStore(String id) {
-    // TODO: implement fetchStore
-    throw UnimplementedError();
+    return _store
+        .collection('stores')
+        .doc(id)
+        .snapshots()
+        .map((event) => Store.fromMap(event.data()!));
   }
 
   @override
-  Future<void> updateStore(Store store) {
-    // TODO: implement updateStore
-    throw UnimplementedError();
+  Future<void> updateStore(Store store) async {
+    await _store.collection('stores').doc(store.id).update(store.toMap());
   }
 }

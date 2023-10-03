@@ -2,13 +2,17 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:vendor_app/core/services/image_picker/image_picker_mixin.dart';
 
 import '../repository/product_repository.dart';
 
 part 'products_event.dart';
 part 'products_state.dart';
 
-class ProductsBloc extends Bloc<ProductsEvent, Productstate> {
+class ProductsBloc extends Bloc<ProductsEvent, Productstate>
+    with PickMediaMixin {
   ProductsBloc(this.productRepository) : super(Productstate.initial) {
     on<_FetchAllProducts>(_fetchAllProducts);
     on<FetchOneProduct>(_fetchOneProduct);
@@ -16,28 +20,46 @@ class ProductsBloc extends Bloc<ProductsEvent, Productstate> {
     on<UpdateProduct>(_updateProduct);
     on<InsertProduct>(_insertProduct);
     on<ToggleActiveProduct>(_toggleActiveProduct);
-
-    _subscription = productRepository.fetchAllProducts().listen((event) {
-      add(_FetchAllProducts(products: event));
-    });
+    on<PickCover>(_pickCover);
+    on<PickImages>(_pickImages);
   }
-  late final StreamSubscription<List<Product>> _subscription;
+
+  FutureOr<void> _pickImages(event, emit) async {
+    emit(Productstate.loading);
+    final result = await pickMultiImage();
+    imagesPaths = result;
+    emit(Productstate.success);
+  }
+
+  FutureOr<void> _pickCover(event, emit) async {
+    emit(Productstate.loading);
+    final result = await pickSingleImage(ImageSource.gallery);
+    coverPath = result;
+    emit(Productstate.success);
+  }
+
   final ProductRepository productRepository;
   List<Product> products = [];
   Product product = Product.empty();
+  String coverPath = '';
+  List<String> imagesPaths = [];
+  String selectedCategory = '';
+  final TextEditingController titleAr = TextEditingController();
+  final TextEditingController titleEn = TextEditingController();
+  final TextEditingController descriptionAr = TextEditingController();
+  final TextEditingController descriptionEn = TextEditingController();
+  final TextEditingController quantity = TextEditingController();
+  final TextEditingController price = TextEditingController();
 
-  FutureOr<void> _fetchAllProducts(_FetchAllProducts event, emit) {
+  FutureOr<void> _fetchAllProducts(
+      _FetchAllProducts event, Emitter<Productstate> emit) async {
     emit(Productstate.loadingData);
-    products = event.products;
-    if (products.isNotEmpty) {
-      emit(Productstate.successData);
-    }
-  }
-
-  @override
-  Future<void> close() {
-    _subscription.cancel();
-    return super.close();
+    await emit.forEach(productRepository.fetchAllProducts(), onData: (data) {
+      products = data;
+      return Productstate.successData;
+    }, onError: (eer, err) {
+      return Productstate.failure;
+    });
   }
 
   FutureOr<void> _fetchOneProduct(FetchOneProduct event, emit) async {
@@ -56,7 +78,45 @@ class ProductsBloc extends Bloc<ProductsEvent, Productstate> {
     });
   }
 
-  FutureOr<void> _insertProduct(InsertProduct event, emit) async {}
+  FutureOr<void> _insertProduct(InsertProduct event, emit) async {
+    if (titleAr.text.isNotEmpty &&
+        titleEn.text.isNotEmpty &&
+        descriptionAr.text.isNotEmpty &&
+        descriptionEn.text.isNotEmpty &&
+        price.text.isNotEmpty &&
+        quantity.text.isNotEmpty) {
+      emit(Productstate.loading);
+      await productRepository
+          .insertProduct(
+            _initProduct(),
+          )
+          .then(
+            (value) => emit(Productstate.success),
+          );
+    } else {
+      emit(Productstate.failure);
+    }
+  }
+
+  Product _initProduct() {
+    return Product(
+      id: '',
+      titleAr: titleAr.text,
+      descriptionAr: descriptionAr.text,
+      titleEn: titleEn.text,
+      storeId: '',
+      descriptionEn: descriptionEn.text,
+      coverUrl: coverPath,
+      images: imagesPaths,
+      active: true,
+      soldOut: false,
+      category: selectedCategory,
+      price: double.parse(price.text),
+      quantity: int.parse(quantity.text),
+      discount: 0,
+      reviews: const [],
+    );
+  }
 
   FutureOr<void> _updateProduct(UpdateProduct event, emit) async {
     emit(Productstate.loading);

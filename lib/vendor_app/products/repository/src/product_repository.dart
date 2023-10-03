@@ -44,8 +44,12 @@ class ProductRepository implements _ProductRepository {
   @override
   Stream<List<Product>> fetchAllProducts() {
     try {
-      return _store.collection('products').snapshots().map((event) =>
-          List<Product>.from(event.docs.map((e) => Product.fromMap(e.data()))));
+      return _store
+          .collection('products')
+          .where('id', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+          .snapshots()
+          .map((event) => List<Product>.from(
+              event.docs.map((e) => Product.fromMap(e.data()))));
     } catch (e) {
       print('fetchAllProducts: $e');
       return Stream.error(e);

@@ -44,7 +44,7 @@ class ProductPreviewView extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              product.title,
+             locale(context)? product.titleAr: product.titleEn,
               style: h3.copyWith(fontWeight: FontWeight.bold),
             ),
           ),
@@ -52,7 +52,7 @@ class ProductPreviewView extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              product.description,
+              locale(context)? product.descriptionAr:product.descriptionEn,
               style: h4.copyWith(fontWeight: FontWeight.bold),
             ),
           ),

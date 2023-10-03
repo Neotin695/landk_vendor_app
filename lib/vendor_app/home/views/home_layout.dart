@@ -4,6 +4,7 @@ import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:vendor_app/core/constances/media_const.dart';
+import 'package:vendor_app/core/services/common.dart';
 import 'package:vendor_app/core/theme/colors/landk_colors.dart';
 import 'package:vendor_app/vendor_app/order/view/order_preview_view.dart';
 
@@ -44,6 +45,7 @@ class _HomeLayoutState extends State<HomeLayout> {
       HomeState.menu => trans(context).settings,
     };
     return Scaffold(
+      key: Common.scaffoldKey,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {},
@@ -58,7 +60,7 @@ class _HomeLayoutState extends State<HomeLayout> {
                 .doc(FirebaseAuth.instance.currentUser!.uid)
                 .snapshots(),
             builder: (context, snapshot) {
-              if (snapshot.hasData) {
+              if (snapshot.hasData && snapshot.data!.exists) {
                 return Switch(
                     value: (snapshot.data!.data())!['active'],
                     onChanged: (value) {

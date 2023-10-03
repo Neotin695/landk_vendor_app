@@ -31,12 +31,11 @@ class FetchOneProduct extends ProductsEvent {
   });
 }
 
-class _FetchAllProducts extends ProductsEvent {
-  final List<Product> products;
-  const _FetchAllProducts({
-    required this.products,
-  });
-}
+class PickCover extends ProductsEvent {}
+
+class PickImages extends ProductsEvent {}
+
+class _FetchAllProducts extends ProductsEvent {}
 
 class ToggleActiveProduct extends ProductsEvent {
   final String id;

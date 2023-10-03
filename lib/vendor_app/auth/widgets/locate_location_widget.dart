@@ -127,7 +127,8 @@ class _UseCurrentLocation extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
               )),
-          child: state.status == FormzSubmissionStatus.inProgress
+          child: state.status == FormzSubmissionStatus.inProgress &&
+                  state.errorMessage == ''
               ? loadingWidget()
               : Text(trans(context).useCurrentLocation),
         );
