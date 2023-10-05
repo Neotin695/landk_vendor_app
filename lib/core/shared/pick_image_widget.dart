@@ -1,50 +1,103 @@
 import 'dart:io';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import '../theme/colors/landk_colors.dart';
 
 // ignore: must_be_immutable
-class PickImageWidget extends StatelessWidget {
+class PickImageWidget extends StatefulWidget {
   PickImageWidget({
     super.key,
     required this.width,
     required this.height,
-    required this.source,
+    this.source,
     required this.onTap,
     required this.label,
+    this.sources,
   });
 
   double width;
   double height;
-  final File source;
+  final String? source;
+  final List<String>? sources;
   final VoidCallback onTap;
   final String label;
 
   @override
+  State<PickImageWidget> createState() => _PickImageWidgetState();
+}
+
+class _PickImageWidgetState extends State<PickImageWidget> {
+  var urlPattern =
+      r"(https?|http)://([-A-Z0-9.]+)(/[-A-Z0-9+&@#/%=~_|!:,.;]*)?(\?[A-Z0-9+&@#/%=~_|!:‌​,.;]*)?";
+
+  @override
   Widget build(BuildContext context) {
+    print(widget.source);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(label),
+        Text(widget.label),
         Container(
-          width: width.w,
-          height: height.h,
+          width: widget.width.w,
+          height: widget.height.h,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10), color: grey1),
+              borderRadius: BorderRadius.circular(10), color: Colors.grey),
           child: Center(
             child: InkWell(
-                onTap: onTap,
-                child: source.path.isEmpty
-                    ? const Icon(Icons.camera)
-                    : Image.file(
-                        source,
-                        fit: BoxFit.cover,
-                      )),
+              onTap: widget.onTap,
+              child: Uri.parse(widget.source ?? '').host.isEmpty
+                  ? offlineImages()
+                  : onlineImages(),
+            ),
           ),
         )
       ],
     );
+  }
+
+  Widget onlineImages() {
+    print('online');
+    return widget.source == null
+        ? widget.sources!.isNotEmpty && widget.sources != null
+            ? CarouselSlider(
+                items: widget.sources!
+                    .map((e) => Image.network(
+                          e,
+                          fit: BoxFit.cover,
+                        ))
+                    .toList(),
+                options: CarouselOptions(aspectRatio: 7 / 4),
+              )
+            : const Icon(Icons.image)
+        : widget.source!.isEmpty
+            ? const Icon(Icons.image)
+            : Image.network(
+                widget.source!,
+                fit: BoxFit.cover,
+              );
+  }
+
+  Widget offlineImages() {
+    print('offline');
+    return widget.source == null
+        ? widget.sources!.isNotEmpty && widget.sources != null
+            ? CarouselSlider(
+                items: widget.sources!
+                    .map((e) => Image.file(
+                          File(e),
+                          fit: BoxFit.cover,
+                        ))
+                    .toList(),
+                options: CarouselOptions(aspectRatio: 7 / 4),
+              )
+            : const Icon(Icons.image)
+        : widget.source!.isEmpty
+            ? const Icon(Icons.image)
+            : Image.file(
+                File(widget.source!),
+                fit: BoxFit.cover,
+              );
   }
 }

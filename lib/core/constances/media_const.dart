@@ -19,3 +19,4 @@ var iLogoOrange = 'assets/icons/logo_orange.svg';
 var iLogo = 'assets/icons/logo.svg';
 var iServerDown = 'assets/icons/noInternet.svg';
 var iProduct = 'assets/icons/product.svg';
+var iStar = 'assets/icons/star.svg';

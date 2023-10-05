@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:vendor_app/core/services/image_picker/image_picker_mixin.dart';
@@ -22,6 +23,7 @@ class ProductsBloc extends Bloc<ProductsEvent, Productstate>
     on<ToggleActiveProduct>(_toggleActiveProduct);
     on<PickCover>(_pickCover);
     on<PickImages>(_pickImages);
+    add(_FetchAllProducts());
   }
 
   FutureOr<void> _pickImages(event, emit) async {
@@ -104,7 +106,7 @@ class ProductsBloc extends Bloc<ProductsEvent, Productstate>
       titleAr: titleAr.text,
       descriptionAr: descriptionAr.text,
       titleEn: titleEn.text,
-      storeId: '',
+      storeId: FirebaseAuth.instance.currentUser!.uid,
       descriptionEn: descriptionEn.text,
       coverUrl: coverPath,
       images: imagesPaths,

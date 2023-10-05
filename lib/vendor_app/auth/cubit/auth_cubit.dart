@@ -124,7 +124,6 @@ class AuthCubit extends Cubit<AuthState> {
         logoUrl: logoPath!,
         coverUrl: coverPath!,
         acceptable: false,
-        products: const [],
         addressInfo: _initAddress(),
         reviews: const []);
   }
@@ -143,7 +142,6 @@ class AuthCubit extends Cubit<AuthState> {
         : '';
     final lastName = state.fullName.value.split(' ').last;
     return Onwer(
-        id: '',
         userName: state.fullName.value,
         phoneNum: state.phone.value,
         email: state.email.value,

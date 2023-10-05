@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -125,7 +123,7 @@ class _StoreInfoWidgetState extends State<StoreInfoWidget> with PickMediaMixin {
               },
             );
           },
-          source: File(cubit.logoPath ?? ''),
+          source: cubit.logoPath ?? '',
         ),
         PickImageWidget(
           label: trans(context).imageCover,
@@ -148,7 +146,7 @@ class _StoreInfoWidgetState extends State<StoreInfoWidget> with PickMediaMixin {
               },
             );
           },
-          source: File(cubit.coverPath ?? ''),
+          source: cubit.coverPath ?? '',
         ),
       ],
     );

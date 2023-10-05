@@ -208,7 +208,8 @@ class _Email extends StatelessWidget {
     );
   }
 
-  TextDirection directionField(BuildContext context) => locale(context)? TextDirection.rtl: TextDirection.ltr;
+  TextDirection directionField(BuildContext context) =>
+      locale(context) ? TextDirection.rtl : TextDirection.ltr;
 }
 
 class _Password extends StatelessWidget {

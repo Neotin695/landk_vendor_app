@@ -4,17 +4,17 @@ import '../../../../../models/address_info.dart';
 import 'onwer.dart';
 
 class Store extends Equatable {
-  final String id;
-  final Onwer onwer;
-  final String name;
-  final bool active;
-  final String category;
-  final String logoUrl;
   final bool acceptable;
-  final String coverUrl;
-  final List<String> products;
+  final bool active;
   final AddressInfo addressInfo;
+  final String category;
+  final String coverUrl;
+  final String id;
+  final String logoUrl;
+  final String name;
+  final Onwer onwer;
   final List<String> reviews;
+
   const Store(
       {required this.id,
       required this.onwer,
@@ -24,7 +24,6 @@ class Store extends Equatable {
       required this.name,
       required this.coverUrl,
       required this.acceptable,
-      required this.products,
       required this.addressInfo,
       required this.reviews});
 
@@ -37,7 +36,6 @@ class Store extends Equatable {
         acceptable: false,
         logoUrl: '',
         coverUrl: '',
-        products: const [],
         addressInfo: AddressInfo.empty(),
         reviews: const [],
       );
@@ -52,7 +50,6 @@ class Store extends Equatable {
         name,
         logoUrl,
         coverUrl,
-        products,
         addressInfo,
         reviews
       ];
@@ -67,7 +64,6 @@ class Store extends Equatable {
       'acceptable': acceptable,
       'coverUrl': coverUrl,
       'name': name,
-      'products': products,
       'addressInfo': addressInfo.toMap(),
       'reviews': reviews,
     };
@@ -83,7 +79,6 @@ class Store extends Equatable {
       acceptable: map['acceptable'] as bool,
       coverUrl: map['coverUrl'] as String,
       name: map['name'] as String,
-      products: List<String>.from((map['products'].map((e) => e))),
       addressInfo:
           AddressInfo.fromMap(map['addressInfo'] as Map<String, dynamic>),
       reviews: List<String>.from(map['reviews'].map((e) => e)),
@@ -98,7 +93,6 @@ class Store extends Equatable {
       String? coverUrl,
       String? name,
       bool? acceptable,
-      List<String>? products,
       AddressInfo? addressInfo,
       List<String>? reviews}) {
     return Store(
@@ -110,7 +104,6 @@ class Store extends Equatable {
         name: name ?? this.name,
         coverUrl: coverUrl ?? this.coverUrl,
         acceptable: acceptable ?? this.acceptable,
-        products: products ?? this.products,
         addressInfo: addressInfo ?? this.addressInfo,
         reviews: reviews ?? this.reviews);
   }

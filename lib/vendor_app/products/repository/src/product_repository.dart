@@ -46,7 +46,7 @@ class ProductRepository implements _ProductRepository {
     try {
       return _store
           .collection('products')
-          .where('id', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+          .where('storeId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
           .snapshots()
           .map((event) => List<Product>.from(
               event.docs.map((e) => Product.fromMap(e.data()))));
@@ -101,7 +101,7 @@ class ProductRepository implements _ProductRepository {
     try {
       final result = await ref.putFile(File(path));
       if (result.state == TaskState.success) {
-        return result.ref.getDownloadURL().toString();
+        return await result.ref.getDownloadURL();
       } else {
         return '';
       }
@@ -121,7 +121,7 @@ class ProductRepository implements _ProductRepository {
       try {
         final result = await ref.putFile(File(path));
         if (result.state == TaskState.success) {
-          urls.add(result.ref.getDownloadURL().toString());
+          urls.add(await result.ref.getDownloadURL());
         } else {
           return [];
         }

@@ -28,6 +28,7 @@ class _ProductsViewState extends State<ProductsView> {
         if (state == Productstate.successData) {
           return ListView.builder(
             itemCount: bloc.products.length,
+            shrinkWrap: true,
             itemBuilder: (context, index) {
               final product = bloc.products[index];
               return ProductItem(product: product);
