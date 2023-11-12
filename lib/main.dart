@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vendor_app/vendor_app/app/app.dart';
 
 import 'core/services/common.dart';
-import 'firebase_options.dart';
+import 'core/services/firebase_options.dart';
 import 'vendor_app/auth/repository/authentication_repository.dart';
 
 void main() async {
