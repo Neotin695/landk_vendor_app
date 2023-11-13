@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:vendor_app/core/theme/colors/landk_colors.dart';
@@ -29,6 +30,7 @@ class _MenuPageState extends State<MenuPage> {
       trans(context).termsAndConditions,
       trans(context).complaintsAndSuggestions,
       trans(context).aboutLandk,
+      trans(context).signOut,
     ];
     return Scaffold(
       body: ListView.builder(
@@ -67,6 +69,9 @@ class _MenuPageState extends State<MenuPage> {
       case 4:
         break;
       case 5:
+        break;
+      case 6:
+        FirebaseAuth.instance.signOut();
         break;
     }
   }

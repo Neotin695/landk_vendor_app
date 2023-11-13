@@ -1,26 +1,159 @@
 {
   "project_info": {
-    "project_number": "189463239788",
-    "project_id": "landk-d29f0",
-    "storage_bucket": "landk-d29f0.appspot.com"
+    "project_number": "662186870563",
+    "project_id": "auxillium-79120",
+    "storage_bucket": "auxillium-79120.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:189463239788:android:53338811f204cfa4ff4c49",
+        "mobilesdk_app_id": "1:662186870563:android:08e8a47bafc2c337472e96",
         "android_client_info": {
-          "package_name": "mehani.sim.vendor_app"
+          "package_name": "mehani.sim.admin_panel_web"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "662186870563-e0tls2cr2q4v27hiqkh4o4rk2gp9m1ti.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyDnO0YYdt_qFW_WwuHFlMCiJM-t31PUu7M"
+          "current_key": "AIzaSyChAKRxKbaJouHR2b-jPEa_zzLpNccyw88"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "662186870563-e0tls2cr2q4v27hiqkh4o4rk2gp9m1ti.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "662186870563-48lnot56636vuakf71ma63cuch3g3e30.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "mehani.sim.auxilium.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:662186870563:android:9c4100eec0d933a9472e96",
+        "android_client_info": {
+          "package_name": "mehani.sim.store_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "662186870563-e0tls2cr2q4v27hiqkh4o4rk2gp9m1ti.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChAKRxKbaJouHR2b-jPEa_zzLpNccyw88"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "662186870563-e0tls2cr2q4v27hiqkh4o4rk2gp9m1ti.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "662186870563-48lnot56636vuakf71ma63cuch3g3e30.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "mehani.sim.auxilium.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:662186870563:android:ae89a6112c102569472e96",
+        "android_client_info": {
+          "package_name": "mehani.sim.vendor_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "662186870563-e0tls2cr2q4v27hiqkh4o4rk2gp9m1ti.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChAKRxKbaJouHR2b-jPEa_zzLpNccyw88"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "662186870563-e0tls2cr2q4v27hiqkh4o4rk2gp9m1ti.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "662186870563-48lnot56636vuakf71ma63cuch3g3e30.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "mehani.sim.auxilium.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:662186870563:android:4b06db5c4ccd9b94472e96",
+        "android_client_info": {
+          "package_name": "modernacademy.auxillium.suport"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "662186870563-ah597vg7bov2t2mmkq054sdh2rd6gpiq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "modernacademy.auxillium.suport",
+            "certificate_hash": "43aa7c47c5b8d27d2d5cdf0e26d16dd90234a1d3"
+          }
+        },
+        {
+          "client_id": "662186870563-e0tls2cr2q4v27hiqkh4o4rk2gp9m1ti.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChAKRxKbaJouHR2b-jPEa_zzLpNccyw88"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "662186870563-e0tls2cr2q4v27hiqkh4o4rk2gp9m1ti.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "662186870563-48lnot56636vuakf71ma63cuch3g3e30.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "mehani.sim.auxilium.RunnerTests"
+              }
+            }
+          ]
         }
       }
     }

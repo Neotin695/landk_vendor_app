@@ -50,20 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDZpVLcvVl1F97QXzpYCoC8Yw3ja-b-akc',
-    appId: '1:189463239788:web:a6a6dfd3dc6c7db7ff4c49',
-    messagingSenderId: '189463239788',
-    projectId: 'landk-d29f0',
-    authDomain: 'landk-d29f0.firebaseapp.com',
-    storageBucket: 'landk-d29f0.appspot.com',
-    measurementId: 'G-EZCGWNTN58',
+    apiKey: 'AIzaSyCJpMiZZNBk0sW6WGrXuE3W5uqxai4cnQw',
+    appId: '1:662186870563:web:1bccdfa277972eef472e96',
+    messagingSenderId: '662186870563',
+    projectId: 'auxillium-79120',
+    authDomain: 'auxillium-79120.firebaseapp.com',
+    storageBucket: 'auxillium-79120.appspot.com',
+    measurementId: 'G-CZSR6R03QK',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDnO0YYdt_qFW_WwuHFlMCiJM-t31PUu7M',
-    appId: '1:189463239788:android:53338811f204cfa4ff4c49',
-    messagingSenderId: '189463239788',
-    projectId: 'landk-d29f0',
-    storageBucket: 'landk-d29f0.appspot.com',
+    apiKey: 'AIzaSyChAKRxKbaJouHR2b-jPEa_zzLpNccyw88',
+    appId: '1:662186870563:android:ae89a6112c102569472e96',
+    messagingSenderId: '662186870563',
+    projectId: 'auxillium-79120',
+    storageBucket: 'auxillium-79120.appspot.com',
   );
 }

@@ -25,30 +25,33 @@ class DashboardRepository implements _DashboardRepository {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get()
         .then((value) async {
-      final store = Store.fromMap(value.data()!);
-      await _firestore
-          .collection('reviews')
-          .where('id', arrayContains: store.reviews)
-          .get()
-          .then((value) async {
-        final reviews =
-            List<Review>.from(value.docs.map((e) => Review.fromMap(e.data())));
-
-        for (var element in reviews) {
-          reviewsCount += element.rate;
-        }
+      if (value.exists && value.data() != null) {
+        final store = Store.fromMap(value.data()!);
         await _firestore
-            .collection('products')
-            .where('storeId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+            .collection('reviews')
+            .where('id', arrayContains: store.reviews)
             .get()
             .then((value) async {
-          products = value.docs.length;
+          final reviews = List<Review>.from(
+              value.docs.map((e) => Review.fromMap(e.data())));
 
-          await _firestore.collection('orders').get().then((value) async {
-            orders = value.docs.length;
+          for (var element in reviews) {
+            reviewsCount += element.rate;
+          }
+          await _firestore
+              .collection('products')
+              .where('storeId',
+                  isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+              .get()
+              .then((value) async {
+            products = value.docs.length;
+
+            await _firestore.collection('orders').get().then((value) async {
+              orders = value.docs.length;
+            });
           });
         });
-      });
+      }
     });
     print('pro: $products');
     return Analysis(
