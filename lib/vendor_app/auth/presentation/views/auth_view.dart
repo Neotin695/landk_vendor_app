@@ -5,12 +5,11 @@ import 'package:formz/formz.dart';
 import 'package:sizer/sizer.dart';
 import 'package:vendor_app/core/constances/media_const.dart';
 import 'package:vendor_app/core/shared/offline_widget.dart';
-import '../../../core/theme/colors/landk_colors.dart';
-import '../../../core/language/lang.dart';
-import '../../../core/theme/fonts/landk_fonts.dart';
-import '../../../core/tools/tools_widget.dart';
+import '../../../../core/theme/colors/landk_colors.dart';
+import '../../../../core/theme/fonts/landk_fonts.dart';
+import '../../../../core/tools/tools_widget.dart';
+import '../../repository/authentication_repository.dart';
 import '../cubit/auth_cubit.dart';
-import '../repository/src/authentication_repository.dart';
 import 'create_account_page.dart';
 
 class AuthView extends StatefulWidget {
@@ -56,13 +55,13 @@ class _AuthViewState extends State<AuthView> {
                   SvgPicture.asset(iLogoOrange),
                   vSpace(5),
                   Text(
-                    AppLocalizations.of(context)!.welcome,
+                    trans(context).welcome,
                     style: h3,
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 3.w),
                     child: Text(
-                      AppLocalizations.of(context)!.welcomeMessage,
+                      trans(context).welcomeMessage,
                       textAlign: TextAlign.center,
                       style: h6,
                     ),
@@ -97,7 +96,7 @@ class _ForgotPassword extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 5.w),
         child: Text(
-          AppLocalizations.of(context)!.forgotPassword,
+          trans(context).forgotPassword,
           style: const TextStyle(decoration: TextDecoration.underline),
         ),
       ),
@@ -117,7 +116,7 @@ class _CreateAccount extends StatelessWidget {
         child: Row(
           children: [
             Text(
-              AppLocalizations.of(context)!.newVendors,
+              trans(context).newVendors,
               style: bold,
             ),
             TextButton(
@@ -135,7 +134,7 @@ class _CreateAccount extends StatelessWidget {
                 foregroundColor: orange,
               ),
               child: Text(
-                AppLocalizations.of(context)!.createAccount,
+                trans(context).createAccount,
                 style: h5.copyWith(fontWeight: FontWeight.bold),
               ),
             ),
@@ -173,7 +172,7 @@ class _SignInBtn extends StatelessWidget {
                   height: 5.h,
                   child: const Center(child: CircularProgressIndicator()))
               : Text(
-                  AppLocalizations.of(context)!.signIn,
+                  trans(context).signIn,
                   style: btnFont,
                 ),
         );
@@ -198,7 +197,7 @@ class _Email extends StatelessWidget {
             onChanged: (email) => context.read<AuthCubit>().emailChanged(email),
             decoration: InputDecoration(
               prefixIcon: const Icon(Icons.email),
-              labelText: AppLocalizations.of(context)!.email,
+              labelText: trans(context).email,
               errorText:
                   state.email.displayError != null ? 'invalid email' : null,
             ),
@@ -229,7 +228,7 @@ class _Password extends StatelessWidget {
                 context.read<AuthCubit>().passwordChanged(password),
             decoration: InputDecoration(
               prefixIcon: const Icon(Icons.password),
-              labelText: AppLocalizations.of(context)!.password,
+              labelText: trans(context).password,
               errorText: state.password.displayError != null
                   ? 'invalid password'
                   : null,

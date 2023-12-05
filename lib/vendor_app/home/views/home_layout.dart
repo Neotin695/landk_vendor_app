@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cool_alert/cool_alert.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
@@ -64,10 +65,19 @@ class _HomeLayoutState extends State<HomeLayout> {
                 return Switch(
                     value: (snapshot.data!.data())!['active'],
                     onChanged: (value) {
-                      FirebaseFirestore.instance
-                          .collection('stores')
-                          .doc(FirebaseAuth.instance.currentUser!.uid)
-                          .update({'active': value});
+                      if ((snapshot.data!.data())!['acceptable']) {
+                        FirebaseFirestore.instance
+                            .collection('stores')
+                            .doc(FirebaseAuth.instance.currentUser!.uid)
+                            .update({'active': value});
+                      } else {
+                        CoolAlert.show(
+                          context: context,
+                          type: CoolAlertType.warning,
+                          text: trans(context).acceptedMsg,
+                          onCancelBtnTap: () {},
+                        );
+                      }
                     });
               }
               return empty();

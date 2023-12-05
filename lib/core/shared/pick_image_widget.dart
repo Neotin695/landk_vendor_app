@@ -80,7 +80,6 @@ class _PickImageWidgetState extends State<PickImageWidget> {
   }
 
   Widget offlineImages() {
-    print('offline');
     return widget.source == null
         ? widget.sources!.isNotEmpty && widget.sources != null
             ? CarouselSlider(

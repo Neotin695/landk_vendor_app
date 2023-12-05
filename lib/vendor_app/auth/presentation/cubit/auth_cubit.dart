@@ -13,11 +13,9 @@ import 'package:vendor_app/models/address_info.dart';
 import 'package:vendor_app/models/id_card.dart';
 import 'package:vendor_app/vendor_app/maps/map_repository/map_repository.dart';
 
-import '../../../core/services/form_input/form_input.dart';
-import '../../maps/view/map_page.dart';
-import '../../store/repository/src/models/onwer.dart';
-import '../../store/repository/src/models/store.dart';
-import '../repository/authentication_repository.dart';
+import '../../../../core/services/form_input/form_input.dart';
+import '../../../maps/view/map_page.dart';
+import '../../repository/authentication_repository.dart';
 
 part 'auth_state.dart';
 
@@ -42,8 +40,13 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> fetchAllCategories() async {
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     categories = await _categoryRepository.fetchAllCategories();
-    category = categories[0];
-    emit(state.copyWith(status: FormzSubmissionStatus.success));
+    if (categories.isNotEmpty) {
+      category = categories[0];
+      emit(state.copyWith(status: FormzSubmissionStatus.success));
+    } else {
+      category = Category.empty();
+      emit(state.copyWith(status: FormzSubmissionStatus.initial));
+    }
   }
 
   Future<void> getCurrentLocation(BuildContext context) async {

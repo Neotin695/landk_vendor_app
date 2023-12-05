@@ -1,7 +1,9 @@
 class LogicConst {
   static const String baseUrlFirebase = 'https://fcm.googleapis.com/fcm/send';
   static const String googleMapApiKey =
-      'AIzaSyChAKRxKbaJouHR2b-jPEa_zzLpNccyw88';
+      'AIzaSyAK5gSlMl2YTeyixpDFIKoN_8l3Ez80mwQ';
   static const String serverKey =
-      'AAAAsP0-KB0:APA91bGHZ1PuakvsHqcUfJIelCbwi1Yw5Ic1fu0vsPIIqDUKG62qh5Qn18_NTVuXyKWqGh22bfkjz519k09Bq4UlvJBKALl5DV1Ga22H1II5FLLoottCxk7MpxcSRcsztPBye_dorS9b';
+      'AAAAK9DOKqM:APA91bEktbXz_yM544vPfiaVH8wBUQOs3PQbzC9MoX61Vysu7UVAnTZffJ2ytRj77LAk6HTmvn1DOiCVZEM9rGbNzP96BHMb-XVbZqfQYjN3ybRCZet8cQGtJlRoMl6J2R6n34Ld6cII';
+
+  
 }

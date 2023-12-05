@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:formz/formz.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_place_picker_mb/google_maps_place_picker.dart';
 import 'package:sizer/sizer.dart';
+import 'package:vendor_app/core/constances/logic_const.dart';
 import 'package:vendor_app/core/theme/colors/landk_colors.dart';
 import 'package:vendor_app/core/theme/fonts/landk_fonts.dart';
 import 'package:vendor_app/core/tools/tools_widget.dart';
 
-import '../../../core/constances/media_const.dart';
+import '../../../../core/constances/media_const.dart';
 import '../cubit/auth_cubit.dart';
 
 class LocateLocationWidget extends StatefulWidget {
@@ -82,7 +85,18 @@ class _SetCurrentLocation extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlinedButton(
       onPressed: () async {
-        await cubit.setLocationOnMap(context);
+        await Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PlacePicker(
+              apiKey: LogicConst.googleMapApiKey,
+              initialPosition: const LatLng(1.343, 1.49),
+              onPlacePicked: (result) {
+                print('location result is : $result');
+              },
+            ),
+          ),
+        );
       },
       style: OutlinedButton.styleFrom(
         padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 20),

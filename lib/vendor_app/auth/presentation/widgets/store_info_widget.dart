@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
-import 'package:vendor_app/core/services/image_picker/image_picker_mixin.dart';
+import 'package:vendor_app/core/services/image_helper/image_picker_mixin.dart';
 import 'package:vendor_app/core/tools/tools_widget.dart';
 
-import '../../../core/shared/pick_image_widget.dart';
-import '../../../core/theme/colors/landk_colors.dart';
-import '../../../core/theme/fonts/landk_fonts.dart';
+import '../../../../core/shared/pick_image_widget.dart';
+import '../../../../core/theme/colors/landk_colors.dart';
+import '../../../../core/theme/fonts/landk_fonts.dart';
 import '../cubit/auth_cubit.dart';
 
 class StoreInfoWidget extends StatefulWidget {
@@ -76,23 +76,29 @@ class _StoreInfoWidgetState extends State<StoreInfoWidget> with PickMediaMixin {
   BlocBuilder<AuthCubit, AuthState> _dropDownButton(BuildContext context) {
     return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, state) {
-        return DropdownButton(
-          hint: Text(
-              locale(context) ? cubit.category.nameAr : cubit.category.nameEn),
-          items: cubit.categories
-              .map<DropdownMenuItem<String>>(
-                (e) => DropdownMenuItem(
-                  value: e.id,
-                  child: Text(locale(context) ? e.nameAr : e.nameEn),
-                ),
-              )
-              .toList(),
-          onChanged: (value) {
-            cubit.category =
-                cubit.categories.firstWhere((element) => element.id == value);
-            setState(() {});
-          },
-        );
+        if (state.status == FormzSubmissionStatus.initial) {
+          return empty();
+        } else if (state.status == FormzSubmissionStatus.success) {
+          return DropdownButton(
+            hint: Text(locale(context)
+                ? cubit.category.nameAr
+                : cubit.category.nameEn),
+            items: cubit.categories
+                .map<DropdownMenuItem<String>>(
+                  (e) => DropdownMenuItem(
+                    value: e.id,
+                    child: Text(locale(context) ? e.nameAr : e.nameEn),
+                  ),
+                )
+                .toList(),
+            onChanged: (value) {
+              cubit.category =
+                  cubit.categories.firstWhere((element) => element.id == value);
+              setState(() {});
+            },
+          );
+        }
+        return empty();
       },
     );
   }
@@ -156,14 +162,22 @@ class _StoreInfoWidgetState extends State<StoreInfoWidget> with PickMediaMixin {
     return showBottomSheet(
         context: context,
         builder: (context) {
-          return Row(
-            children: [
-              IconButton(
-                  onPressed: cameraMethod, icon: const Icon(Icons.camera)),
-              IconButton(
-                  onPressed: galleryMethod,
-                  icon: const Icon(Icons.photo_album)),
-            ],
+          return Card(
+            elevation: 5,
+            color: grey2,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                      onPressed: cameraMethod, icon: const Icon(Icons.camera)),
+                  IconButton(
+                      onPressed: galleryMethod,
+                      icon: const Icon(Icons.photo_album)),
+                ],
+              ),
+            ),
           );
         });
   }

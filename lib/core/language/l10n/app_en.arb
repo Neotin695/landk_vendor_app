@@ -4,6 +4,7 @@
   "welcome": "Welcome to Landak Vendor",
   "welcomeMessage": "Log in and be able to sell your products easily and become a partner in your business",
   "landk": "Landk",
+  "acceptedMsg":"This feature is available upon your acceptance from the administration",
   "email": "Email",
   "password": "Password",
   "signIn": "Sign In",

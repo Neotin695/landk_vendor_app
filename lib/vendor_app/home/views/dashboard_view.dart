@@ -32,7 +32,8 @@ class _DashboardViewState extends State<DashboardView> {
         builder: (context, state) {
           if (state == DashboardStatus.loading) {
             return Center(child: loadingWidget());
-          } else if (state == DashboardStatus.success) {
+          } else if (state == DashboardStatus.success ||
+              state == DashboardStatus.initial) {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

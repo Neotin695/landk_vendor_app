@@ -50,20 +50,22 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCJpMiZZNBk0sW6WGrXuE3W5uqxai4cnQw',
-    appId: '1:662186870563:web:1bccdfa277972eef472e96',
-    messagingSenderId: '662186870563',
-    projectId: 'auxillium-79120',
-    authDomain: 'auxillium-79120.firebaseapp.com',
-    storageBucket: 'auxillium-79120.appspot.com',
-    measurementId: 'G-CZSR6R03QK',
+    apiKey: 'AIzaSyDW1l4nDBsSts-eUGjuRLTmU1a3U6DqfTM',
+    appId: '1:188186765987:web:4eaaa84641d3604b462d16',
+    messagingSenderId: '188186765987',
+    projectId: 'fir-multi-vendor-fa07d',
+    authDomain: 'fir-multi-vendor-fa07d.firebaseapp.com',
+    databaseURL: 'https://fir-multi-vendor-fa07d-default-rtdb.firebaseio.com',
+    storageBucket: 'fir-multi-vendor-fa07d.appspot.com',
+    measurementId: 'G-JHBKNTPJKY',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyChAKRxKbaJouHR2b-jPEa_zzLpNccyw88',
-    appId: '1:662186870563:android:ae89a6112c102569472e96',
-    messagingSenderId: '662186870563',
-    projectId: 'auxillium-79120',
-    storageBucket: 'auxillium-79120.appspot.com',
+    apiKey: 'AIzaSyAK5gSlMl2YTeyixpDFIKoN_8l3Ez80mwQ',
+    appId: '1:188186765987:android:e4022ece4ce67d00462d16',
+    messagingSenderId: '188186765987',
+    projectId: 'fir-multi-vendor-fa07d',
+    databaseURL: 'https://fir-multi-vendor-fa07d-default-rtdb.firebaseio.com',
+    storageBucket: 'fir-multi-vendor-fa07d.appspot.com',
   );
 }

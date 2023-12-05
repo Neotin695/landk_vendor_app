@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../auth/views/auth_page.dart';
+import '../../auth/presentation/views/auth_page.dart';
 import '../../home/views/home_layout.dart';
 import '../bloc/app_bloc.dart';
 

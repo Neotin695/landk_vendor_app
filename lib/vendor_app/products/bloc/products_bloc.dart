@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:vendor_app/core/services/image_picker/image_picker_mixin.dart';
+import 'package:vendor_app/core/services/image_helper/image_picker_mixin.dart';
 
 import '../repository/product_repository.dart';
 

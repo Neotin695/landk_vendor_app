@@ -5,8 +5,8 @@ import 'package:sizer/sizer.dart';
 import 'package:vendor_app/core/constances/media_const.dart';
 import 'package:vendor_app/core/tools/tools_widget.dart';
 
-import '../../../core/theme/colors/landk_colors.dart';
-import '../../../core/theme/fonts/landk_fonts.dart';
+import '../../../../core/theme/colors/landk_colors.dart';
+import '../../../../core/theme/fonts/landk_fonts.dart';
 import '../cubit/auth_cubit.dart';
 
 class OnwerInfoWidget extends StatefulWidget {
@@ -162,6 +162,7 @@ class _Password extends StatelessWidget {
           child: TextField(
             keyboardType: TextInputType.visiblePassword,
             key: const Key('password-input'),
+            obscureText: true,
             textDirection: directionField(context),
             onChanged: (password) => cubit.passwordChangedSignUp(password),
             decoration: InputDecoration(
@@ -190,6 +191,7 @@ class _ConfirmPassword extends StatelessWidget {
           child: TextField(
             keyboardType: TextInputType.visiblePassword,
             key: const Key('password-input'),
+            obscureText: true,
             textDirection: directionField(context),
             onChanged: (password) => cubit.confirmedPasswordChanged(password),
             decoration: InputDecoration(
