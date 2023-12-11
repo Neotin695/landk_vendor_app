@@ -4,6 +4,7 @@ import 'package:vendor_app/vendor_app/auth/domain/entities/user_entity.dart';
 
 import '../../../../models/bank_model.dart';
 import '../../../../models/rental_model.dart';
+import 'package:intl/intl.dart';
 
 class UserModel extends UserEntity {
   const UserModel(
@@ -16,7 +17,6 @@ class UserModel extends UserEntity {
       required super.email,
       required super.photoUrl,
       required super.role,
-      super.tempPathImg,
       required super.lastOnline,
       required super.settings,
       required super.bankDetails,
@@ -60,7 +60,7 @@ class UserModel extends UserEntity {
       rental: userEntity.rental,
       phonNum: userEntity.phonNum,
       walletAmount: userEntity.walletAmount);
-      
+
   static UserModel empty = UserModel(
       id: '',
       fcmToken: '',
@@ -71,7 +71,7 @@ class UserModel extends UserEntity {
       email: '',
       photoUrl: ImgModel.empty(),
       role: '',
-      lastOnline: Timestamp(0, 0),
+      lastOnline: '2023-12-10 12:38:26.172',
       settings: const Settings(),
       bankDetails: BankModel.empty(),
       rental: Rental.empty(),
@@ -89,7 +89,7 @@ class UserModel extends UserEntity {
       active: map['active'] as bool,
       isActive: map['isActive'] as bool,
       role: map['role'] as String,
-      lastOnline: Timestamp.fromMillisecondsSinceEpoch(map['lastOnline']),
+      lastOnline: map['lastOnline'] as String,
       settings: const Settings(),
       bankDetails:
           BankModel.fromMap(map['bankDetails'] as Map<String, dynamic>),

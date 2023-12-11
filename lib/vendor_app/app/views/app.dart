@@ -1,4 +1,3 @@
-import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -10,23 +9,18 @@ import 'package:vendor_app/core/theme/colors/landk_colors.dart';
 import '../../../core/language/l10n/l10n.dart';
 import '../../../core/language/lang.dart';
 import '../../../core/services/common.dart';
-import '../../auth/repository/authentication_repository.dart';
 import '../app.dart';
 
 class App extends StatelessWidget {
-  const App({super.key, required this.authenticationRepository});
-
-  final AuthenticationRepository authenticationRepository;
+  const App({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider.value(
-      value: authenticationRepository,
-      child: BlocProvider(
-        create: (context) =>
-            AppBloc(authenticationRepository: authenticationRepository),
-        child: const AppView(),
-      ),
+    return BlocProvider(
+      create: (context) => AppBloc()..add(AppUserChanged()),
+      child: const AppView(),
     );
   }
 }
@@ -53,13 +47,10 @@ class _AppViewState extends State<AppView> {
   @override
   Widget build(BuildContext context) {
     return Sizer(
-      builder: (context, orientation, deviceType) => MaterialApp(
+      builder: (context, orientation, deviceType) => MaterialApp.router(
         key: key,
         debugShowCheckedModeBanner: false,
-        home: FlowBuilder<AppStatus>(
-          state: context.select((AppBloc bloc) => bloc.state.status),
-          onGeneratePages: onGenerateAuthPage,
-        ),
+        routerConfig: RoutesConfig.router,
         theme: themeData(),
         supportedLocales: L10n.all,
         locale: Common.prefs.getString('locale') != null

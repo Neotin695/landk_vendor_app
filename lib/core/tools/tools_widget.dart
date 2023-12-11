@@ -69,3 +69,27 @@ Widget dropDownButtonLang(BuildContext context) {
     ),
   );
 }
+
+showPickImageBottomSheet(BuildContext context, cameraMethod, galleryMethod) {
+  return showBottomSheet(
+      context: context,
+      builder: (context) {
+        return Card(
+          elevation: 5,
+          color: grey2,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                    onPressed: cameraMethod, icon: const Icon(Icons.camera)),
+                IconButton(
+                    onPressed: galleryMethod,
+                    icon: const Icon(Icons.photo_album)),
+              ],
+            ),
+          ),
+        );
+      });
+}

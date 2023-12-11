@@ -1,41 +1,37 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-
-import '../../auth/repository/authentication_repository.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:vendor_app/core/services/shared_values.dart';
+import 'package:vendor_app/vendor_app/auth/data/model/user_model.dart';
 
 part 'app_event.dart';
 part 'app_state.dart';
 
 class AppBloc extends Bloc<AppEvent, AppState> {
-  AppBloc({required AuthenticationRepository authenticationRepository})
-      : _authenticationRepository = authenticationRepository,
-        super(authenticationRepository.currentUser.isNotEmpty
-            ? AppState.authenticated(authenticationRepository.currentUser)
-            : const AppState.unauthenticated()) {
-    on<_AppUserChanged>(_userChanged);
+  AppBloc() : super(const AppState.unauthenticated()) {
+    on<AppUserChanged>(_userChanged);
     on<AppLogoutRequest>(_appLogoutRequest);
-    _streamSubscription = authenticationRepository.user.listen((user) {
-      add(_AppUserChanged(user: user));
+    add(AppUserChanged());
+  }
+
+  FutureOr<void> _appLogoutRequest(event, emit) {}
+
+  FutureOr<void> _userChanged(AppUserChanged event, Emitter emit) {
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((value) {
+      if (value.exists) {
+        final user = UserModel.fromMap(value.data()!);
+        print(user);
+        userData.setIfChanged(user.toMap());
+        userData.save();
+        emit(const AppState.authenticated());
+      }
     });
-  }
-
-  final AuthenticationRepository _authenticationRepository;
-  late final StreamSubscription<User> _streamSubscription;
-  FutureOr<void> _appLogoutRequest(event, emit) {
-    unawaited(_authenticationRepository.logOut());
-  }
-
-  FutureOr<void> _userChanged(_AppUserChanged event, emit) {
-    emit(event.user.isNotEmpty
-        ? AppState.authenticated(event.user)
-        : const AppState.unauthenticated());
-  }
-
-  @override
-  Future<void> close() {
-    _streamSubscription.cancel();
-    return super.close();
   }
 }

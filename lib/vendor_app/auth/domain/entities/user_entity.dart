@@ -14,24 +14,20 @@ class UserEntity extends Equatable {
   final String firstName;
   final String lastName;
   final String email;
-  final String? tempPathImg;
   final ImgModel photoUrl;
   final String role;
-  final Timestamp lastOnline;
+  final String lastOnline;
   final Settings settings;
   final BankModel bankDetails;
   final Rental rental;
   final String phonNum;
   final double walletAmount;
 
-  
-
   const UserEntity({
     required this.id,
     required this.fcmToken,
     required this.firstName,
     required this.active,
-    this.tempPathImg,
     required this.isActive,
     required this.lastName,
     required this.email,
@@ -54,7 +50,6 @@ class UserEntity extends Equatable {
       lastName,
       active,
       isActive,
-      tempPathImg!,
       email,
       photoUrl,
       role,
@@ -67,7 +62,22 @@ class UserEntity extends Equatable {
     ];
   }
 
-  
+  static UserEntity empty() => UserEntity(
+      id: '',
+      fcmToken: '',
+      firstName: '',
+      active: false,
+      isActive: false,
+      lastName: '',
+      email: '',
+      photoUrl: ImgModel.empty(),
+      role: '',
+      lastOnline: '',
+      settings: const Settings(),
+      bankDetails: BankModel.empty(),
+      rental: Rental.empty(),
+      phonNum: '',
+      walletAmount: 0);
 
   UserEntity copyWith({
     String? id,
@@ -77,10 +87,9 @@ class UserEntity extends Equatable {
     String? firstName,
     String? lastName,
     String? email,
-    String? tempPathImg,
     ImgModel? photoUrl,
     String? role,
-    Timestamp? lastOnline,
+    String? lastOnline,
     Settings? settings,
     BankModel? bankDetails,
     Rental? rental,
@@ -95,7 +104,6 @@ class UserEntity extends Equatable {
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
       email: email ?? this.email,
-      tempPathImg: tempPathImg ?? this.tempPathImg,
       photoUrl: photoUrl ?? this.photoUrl,
       role: role ?? this.role,
       lastOnline: lastOnline ?? this.lastOnline,

@@ -8,6 +8,7 @@ import 'package:vendor_app/vendor_app/auth/data/model/user_model.dart';
 abstract class BaseRemoteFirebase {
   Future<UserModel> signin(String email, String password);
   Future<UserModel> signup(UserModel userModel, String password);
+  Future<void> forgotPassword(String email);
 }
 
 class RemoteFirebase with ImageUploader implements BaseRemoteFirebase {
@@ -48,19 +49,38 @@ class RemoteFirebase with ImageUploader implements BaseRemoteFirebase {
 
   @override
   Future<UserModel> signup(UserModel userModel, String password) async {
+    UserModel user = UserModel.empty;
+    print(userModel);
     try {
-      final userAuth = await _auth.createUserWithEmailAndPassword(
-          email: userModel.email, password: password);
+      await _auth
+          .createUserWithEmailAndPassword(
+              email: userModel.email, password: password)
+          .then((userAuth) async {
+        await uploadSingleImg<String>(_storage, 'users', userModel.photoUrl.url)
+            .then((value) async {
+          await _firestore
+              .collection('users')
+              .doc(userAuth.user!.uid)
+              .set(UserModel.toModel(userModel.copyWith(
+                      photoUrl: value, id: userAuth.user!.uid))
+                  .toMap())
+              .then((_) {
+            user = UserModel.toModel(userModel.copyWith(photoUrl: value));
+          });
+        });
+      });
 
-      final imgUrl = await uploadSingleImg<String>(
-          _storage, 'users', userModel.tempPathImg!);
+      return user;
+    } on FirebaseAuthException catch (e) {
+      print(e);
+      throw e.code;
+    }
+  }
 
-      await _firestore
-          .collection('users')
-          .doc(userAuth.user!.uid)
-          .set(UserModel.toModel(userModel.copyWith(photoUrl: imgUrl)).toMap());
-
-      return UserModel.toModel(userModel.copyWith(photoUrl: imgUrl));
+  @override
+  Future<void> forgotPassword(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
       throw e.code;
     }

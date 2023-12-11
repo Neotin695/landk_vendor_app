@@ -1,47 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:formz/formz.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sizer/sizer.dart';
 import 'package:vendor_app/core/constances/media_const.dart';
 import 'package:vendor_app/core/shared/offline_widget.dart';
+import 'package:vendor_app/core/shared/txt_field.dart';
+import 'package:vendor_app/vendor_app/auth/presentation/bloc/auth_bloc.dart';
 import '../../../../core/theme/colors/landk_colors.dart';
 import '../../../../core/theme/fonts/landk_fonts.dart';
 import '../../../../core/tools/tools_widget.dart';
-import '../../repository/authentication_repository.dart';
-import '../cubit/auth_cubit.dart';
-import 'create_account_page.dart';
 
-class AuthView extends StatefulWidget {
-  const AuthView({super.key});
+class AuthSignInView extends StatefulWidget {
+  const AuthSignInView({super.key});
 
   @override
-  State<AuthView> createState() => _AuthViewState();
+  State<AuthSignInView> createState() => _AuthSignInViewState();
 }
 
-late AuthCubit cubit;
+late AuthBloc bloc;
 
-class _AuthViewState extends State<AuthView> {
+class _AuthSignInViewState extends State<AuthSignInView> {
   @override
   void initState() {
-    cubit = context.read<AuthCubit>();
+    bloc = BlocProvider.of<AuthBloc>(context);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthCubit, AuthState>(
+    return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        if (state.status.isFailure) {
+        if (state.status == AuthStates.failure) {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
               SnackBar(
-                content: Text(state.errorMessage.isEmpty
+                content: Text(state.message.isEmpty
                     ? 'Authentication Failure'
-                    : state.errorMessage),
+                    : state.message),
               ),
             );
+        } else if (state.status == AuthStates.success) {
+          context.go('/home');
         }
       },
       child: OfflineWidget(
@@ -116,25 +117,18 @@ class _CreateAccount extends StatelessWidget {
         child: Row(
           children: [
             Text(
-              trans(context).newVendors,
+              trans(context).dontHaveAccount,
               style: bold,
             ),
             TextButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => CreateAccountPage(
-                      authenticationRepository: AuthenticationRepository(),
-                    ),
-                  ),
-                );
+                context.go('/signup');
               },
               style: TextButton.styleFrom(
                 foregroundColor: orange,
               ),
               child: Text(
-                trans(context).createAccount,
+                trans(context).signUp,
                 style: h5.copyWith(fontWeight: FontWeight.bold),
               ),
             ),
@@ -150,13 +144,16 @@ class _SignInBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthCubit, AuthState>(
+    return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
         return ElevatedButton(
-          onPressed: () => context.read<AuthCubit>().logInWithCredentials(),
+          onPressed: () => bloc.add(SignInEvent()),
           style: ButtonStyle(
             alignment: Alignment.center,
             minimumSize: MaterialStateProperty.all(
+              Size(90.w, 7.5.h),
+            ),
+            maximumSize: MaterialStateProperty.all(
               Size(90.w, 7.5.h),
             ),
             shape: MaterialStateProperty.all(
@@ -166,11 +163,8 @@ class _SignInBtn extends StatelessWidget {
             ),
             backgroundColor: MaterialStateProperty.all(orange),
           ),
-          child: state.status == FormzSubmissionStatus.inProgress
-              ? SizedBox(
-                  width: 5.w,
-                  height: 5.h,
-                  child: const Center(child: CircularProgressIndicator()))
+          child: state.status == AuthStates.loading
+              ? loadingWidget()
               : Text(
                   trans(context).signIn,
                   style: btnFont,
@@ -186,54 +180,48 @@ class _Email extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthCubit, AuthState>(
+    return BlocBuilder<AuthBloc, AuthState>(
       buildWhen: (previous, next) => previous.email != next.email,
       builder: (context, state) {
-        return Container(
-          margin: EdgeInsets.symmetric(horizontal: 5.w),
-          child: TextField(
-            textDirection: directionField(context),
-            key: const Key('email-input'),
-            onChanged: (email) => context.read<AuthCubit>().emailChanged(email),
-            decoration: InputDecoration(
-              prefixIcon: const Icon(Icons.email),
-              labelText: trans(context).email,
-              errorText:
-                  state.email.displayError != null ? 'invalid email' : null,
-            ),
-          ),
+        return TxtField(
+          onChange: (email) => bloc.add(EmailChangeSignInEvent(value: email)),
+          icon: const Icon(Icons.email),
+          label: trans(context).email,
+          inputType: TextInputType.emailAddress,
+          errorTxt: state.email.displayError != null ? 'invalid email' : null,
         );
       },
     );
   }
-
-  TextDirection directionField(BuildContext context) =>
-      locale(context) ? TextDirection.rtl : TextDirection.ltr;
 }
 
-class _Password extends StatelessWidget {
+class _Password extends StatefulWidget {
   const _Password();
 
   @override
+  State<_Password> createState() => _PasswordState();
+}
+
+class _PasswordState extends State<_Password> {
+  bool obsecure = true;
+
+  @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthCubit, AuthState>(
+    return BlocBuilder<AuthBloc, AuthState>(
       buildWhen: (previous, next) => previous.password != next.password,
       builder: (context, state) {
-        return Container(
-          margin: EdgeInsets.symmetric(horizontal: 5.w),
-          child: TextField(
-            keyboardType: TextInputType.visiblePassword,
-            key: const Key('password-input'),
-            onChanged: (password) =>
-                context.read<AuthCubit>().passwordChanged(password),
-            decoration: InputDecoration(
-              prefixIcon: const Icon(Icons.password),
-              labelText: trans(context).password,
-              errorText: state.password.displayError != null
-                  ? 'invalid password'
-                  : null,
-            ),
+        return TxtField(
+          inputType: TextInputType.visiblePassword,
+          onChange: (password) =>
+              bloc.add(PasswordChangeSignInEvent(value: password)),
+          icon: InkWell(
+            onTap: () => setState(() => obsecure = !obsecure),
+            child: Icon(obsecure ? Icons.visibility : Icons.visibility_off),
           ),
+          obsecureTxt: obsecure,
+          label: trans(context).password,
+          errorTxt:
+              state.password.displayError != null ? 'invalid password' : null,
         );
       },
     );

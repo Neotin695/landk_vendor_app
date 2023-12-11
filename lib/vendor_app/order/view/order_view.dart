@@ -40,12 +40,12 @@ class _OrderViewState extends State<OrderView> with TickerProviderStateMixin {
       ),
       body: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
           stream: FirebaseFirestore.instance
-              .collection('stores')
+              .collection('users')
               .doc(FirebaseAuth.instance.currentUser!.uid)
               .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              if (snapshot.data!.data()!['active'] == true) {
+              if (snapshot.data!.data()!['isActive'] == true) {
                 return SafeArea(
                   child: BlocBuilder<OrderBloc, OrderState>(
                     builder: (context, state) {

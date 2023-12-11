@@ -1,6 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cool_alert/cool_alert.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -54,36 +51,7 @@ class _HomeLayoutState extends State<HomeLayout> {
         ),
         title: Text(getTitleOfPage),
         centerTitle: true,
-        actions: [
-          StreamBuilder(
-            stream: FirebaseFirestore.instance
-                .collection('stores')
-                .doc(FirebaseAuth.instance.currentUser!.uid)
-                .snapshots(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData && snapshot.data!.exists) {
-                return Switch(
-                    value: (snapshot.data!.data())!['active'],
-                    onChanged: (value) {
-                      if ((snapshot.data!.data())!['acceptable']) {
-                        FirebaseFirestore.instance
-                            .collection('stores')
-                            .doc(FirebaseAuth.instance.currentUser!.uid)
-                            .update({'active': value});
-                      } else {
-                        CoolAlert.show(
-                          context: context,
-                          type: CoolAlertType.warning,
-                          text: trans(context).acceptedMsg,
-                          onCancelBtnTap: () {},
-                        );
-                      }
-                    });
-              }
-              return empty();
-            },
-          )
-        ],
+        actions: [],
       ),
       body: _FlowPage(controller: controller),
       floatingActionButton: FloatingActionButton(

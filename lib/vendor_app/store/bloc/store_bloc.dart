@@ -2,8 +2,9 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:vendor_app/vendor_app/auth/repository/authentication_repository.dart';
 import 'package:vendor_app/vendor_app/store/repository/src/models/store.dart';
+
+import '../repository/store_reository.dart';
 
 part 'store_event.dart';
 part 'store_state.dart';

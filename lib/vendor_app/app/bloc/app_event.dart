@@ -10,9 +10,4 @@ class AppLogoutRequest extends AppEvent {
 }
 
 // ignore: unused_element
-class _AppUserChanged extends AppEvent {
-  final User user;
-  _AppUserChanged({
-    required this.user,
-  });
-}
+class AppUserChanged extends AppEvent {}

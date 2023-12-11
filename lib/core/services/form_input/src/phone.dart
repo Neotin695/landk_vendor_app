@@ -9,8 +9,6 @@ class Phone extends FormzInput<String, PhoneValidatorError> {
 
   @override
   PhoneValidatorError? validator(String value) {
-    return value.trim().length > 10 && value.trim().length <= 12
-        ? null
-        : PhoneValidatorError.invalid;
+    return value.isNotEmpty ? null : PhoneValidatorError.invalid;
   }
 }

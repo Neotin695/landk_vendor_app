@@ -74,41 +74,41 @@ class _InsertProductViewState extends State<InsertProductView> {
                   );
                 },
               ),
-              TxtField(
-                cn: bloc.titleAr,
-                label: 'اسم المنتج بالعربية',
-              ),
-              TxtField(
-                cn: bloc.titleEn,
-                label: 'Product title en',
-              ),
-              TxtField(
-                cn: bloc.descriptionAr,
-                label: 'وصف المنتج بالعربية',
-              ),
-              TxtField(
-                cn: bloc.descriptionEn,
-                label: 'Product description en',
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Expanded(
-                    child: TxtField(
-                      cn: bloc.quantity,
-                      label: 'Product quantity',
-                      inputType: TextInputType.number,
-                    ),
-                  ),
-                  Expanded(
-                    child: TxtField(
-                      cn: bloc.price,
-                      label: 'Product Price',
-                      inputType: TextInputType.number,
-                    ),
-                  ),
-                ],
-              ),
+              // TxtField(
+              //   onChange: bloc.titleAr,
+              //   label: 'اسم المنتج بالعربية',
+              // ),
+              // TxtField(
+              //   onChange: bloc.titleEn,
+              //   label: 'Product title en',
+              // ),
+              // TxtField(
+              //   onChange: bloc.descriptionAr,
+              //   label: 'وصف المنتج بالعربية',
+              // ),
+              // TxtField(
+              //   onChange: bloc.descriptionEn,
+              //   label: 'Product description en',
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //   children: [
+              //     Expanded(
+              //       child: TxtField(
+              //         onChange: bloc.quantity,
+              //         label: 'Product quantity',
+              //         inputType: TextInputType.number,
+              //       ),
+              //     ),
+              //     Expanded(
+              //       child: TxtField(
+              //         onChange: bloc.price,
+              //         label: 'Product Price',
+              //         inputType: TextInputType.number,
+              //       ),
+              //     ),
+              //   ],
+              // ),
               FutureBuilder(
                 future: FirebaseFirestore.instance.collection('category').get(),
                 builder: (context, snapshot) {

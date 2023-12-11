@@ -28,4 +28,13 @@ class AuthRepoImpl implements AuthRepo {
       throw e;
     }
   }
+
+  @override
+  Future<void> forgotPassword(String email) {
+    try {
+      return _remoteFirebase.forgotPassword(email);
+    } catch (e) {
+      throw e;
+    }
+  }
 }

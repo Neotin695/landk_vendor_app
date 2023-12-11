@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sizer/sizer.dart';
 import 'package:vendor_app/core/theme/colors/landk_colors.dart';
 import 'package:vendor_app/core/theme/fonts/landk_fonts.dart';
@@ -71,7 +72,8 @@ class _MenuPageState extends State<MenuPage> {
       case 5:
         break;
       case 6:
-        FirebaseAuth.instance.signOut();
+        FirebaseAuth.instance.signOut().then((value) => context.go('/'));
+
         break;
     }
   }
