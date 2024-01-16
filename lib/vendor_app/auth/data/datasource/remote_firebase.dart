@@ -50,7 +50,6 @@ class RemoteFirebase with ImageUploader implements BaseRemoteFirebase {
   @override
   Future<UserModel> signup(UserModel userModel, String password) async {
     UserModel user = UserModel.empty;
-    print(userModel);
     try {
       await _auth
           .createUserWithEmailAndPassword(
@@ -69,11 +68,11 @@ class RemoteFirebase with ImageUploader implements BaseRemoteFirebase {
           });
         });
       });
-
       return user;
     } on FirebaseAuthException catch (e) {
-      print(e);
       throw e.code;
+    } catch (e) {
+      throw e;
     }
   }
 

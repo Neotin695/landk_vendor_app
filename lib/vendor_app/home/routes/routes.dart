@@ -3,7 +3,7 @@ import 'package:vendor_app/vendor_app/home/widgets/home_page.dart';
 import 'package:vendor_app/vendor_app/home/widgets/menu_page.dart';
 import 'package:vendor_app/vendor_app/order/view/order_page.dart';
 import 'package:vendor_app/vendor_app/products/view/product_page.dart';
-import 'package:vendor_app/vendor_app/store/view/store_page.dart';
+import 'package:vendor_app/vendor_app/store/presentation/view/store_page.dart';
 
 enum HomeState {
   home,

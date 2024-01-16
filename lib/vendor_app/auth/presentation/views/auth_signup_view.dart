@@ -47,6 +47,13 @@ class _AuthSignUpViewState extends State<AuthSignUpView> {
                 context.pop();
               },
             );
+          } else if (state.status == AuthStates.failure) {
+            CoolAlert.show(
+              context: context,
+              type: CoolAlertType.error,
+              text: state.message,
+              onConfirmBtnTap: () {},
+            );
           }
         },
         child: SafeArea(

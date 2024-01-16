@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vendor_app/vendor_app/store/view/store_view.dart';
+import 'package:vendor_app/vendor_app/store/presentation/view/store_view.dart';
 
-import '../bloc/store_bloc.dart';
-import '../repository/store_reository.dart';
+import '../../bloc/store_bloc.dart';
+import '../../repository/store_reository.dart';
 
 class StorePage extends StatelessWidget {
   static Page page() => MaterialPage(

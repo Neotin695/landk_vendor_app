@@ -6,11 +6,11 @@ import 'package:vendor_app/core/services/common.dart';
 import 'package:vendor_app/vendor_app/products/repository/src/product_repository.dart';
 import 'package:vendor_app/vendor_app/products/view/insert_product_page.dart';
 
-import '../../../core/theme/colors/landk_colors.dart';
-import '../../../core/theme/fonts/landk_fonts.dart';
-import '../../../core/tools/tools_widget.dart';
-import '../../products/view/products_page.dart';
-import '../bloc/store_bloc.dart';
+import '../../../../core/theme/colors/landk_colors.dart';
+import '../../../../core/theme/fonts/landk_fonts.dart';
+import '../../../../core/tools/tools_widget.dart';
+import '../../../products/view/products_page.dart';
+import '../../bloc/store_bloc.dart';
 
 class StoreView extends StatefulWidget {
   const StoreView({
